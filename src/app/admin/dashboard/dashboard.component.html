@@ -1,0 +1,489 @@
+ <div class="page-wrapper">
+			
+                <div class="content container-fluid">
+					
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="page-title">Bienvenue Admin!</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item active">Dashboard</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+					<div class="row">
+						<div class="col-xl-3 col-sm-6 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="dash-widget-header">
+										<span class="dash-widget-icon text-primary border-primary">
+											<i class="fe fe-users"></i>
+										</span>
+										<div class="dash-count">
+											<h3>168</h3>
+										</div>
+									</div>
+									<div class="dash-widget-info">
+										<h6 class="text-muted">Praticiens</h6>
+										<div class="progress progress-sm">
+											<div class="progress-bar bg-primary w-50"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="dash-widget-header">
+										<span class="dash-widget-icon text-success">
+											<i class="fe fe-credit-card"></i>
+										</span>
+										<div class="dash-count">
+											<h3>487</h3>
+										</div>
+									</div>
+									<div class="dash-widget-info">
+										
+										<h6 class="text-muted">Patients</h6>
+										<div class="progress progress-sm">
+											<div class="progress-bar bg-success w-50"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="dash-widget-header">
+										<span class="dash-widget-icon text-danger border-danger">
+											<i class="fe fe-money"></i>
+										</span>
+										<div class="dash-count">
+											<h3>485</h3>
+										</div>
+									</div>
+									<div class="dash-widget-info">
+										
+										<h6 class="text-muted">Rendez-Vous</h6>
+										<div class="progress progress-sm">
+											<div class="progress-bar bg-danger w-50"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-sm-6 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="dash-widget-header">
+										<span class="dash-widget-icon text-warning border-warning">
+											<i class="fe fe-folder"></i>
+										</span>
+										<div class="dash-count">
+											<h3>62523 FCFA</h3>
+										</div>
+									</div>
+									<div class="dash-widget-info">
+										
+										<h6 class="text-muted">Revenue</h6>
+										<div class="progress progress-sm">
+											<div class="progress-bar bg-warning w-50"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-lg-6">
+						
+							<!-- Sales Chart -->
+							<div class="card card-chart">
+								<div class="card-header">
+									<h4 class="card-title">Revenue</h4>
+								</div>
+								<div class="card-body">
+									<div id="morrisArea"></div>
+								</div>
+							</div>
+							<!-- /Sales Chart -->
+							
+						</div>
+						<div class="col-md-12 col-lg-6">
+						
+							<!-- Invoice Chart -->
+							<div class="card card-chart">
+								<div class="card-header">
+									<h4 class="card-title">Status</h4>
+								</div>
+								<div class="card-body">
+									<div id="morrisLine"></div>
+								</div>
+							</div>
+							<!-- /Invoice Chart -->
+							
+						</div>	
+					</div>
+					<div class="row">
+						<div class="col-md-6 d-flex">
+						
+							<!-- Recent Orders -->
+							<div class="card card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title">Liste des Praticiens</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>
+													<th>Nom des Particiens</th>
+													<th>Spécialité</th>
+													<th>Facturé</th>
+													<th>Notes</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Diallo Boubacar</a>
+														</h2>
+													</td>
+													<td>Dentaire</td>
+													<td>3200.00 FCFA</td>
+													<td>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star-o text-secondary"></i>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Fabrice Biyioghe</a>
+														</h2>
+													</td>
+													<td>Dentaire</td>
+													<td>3100.00 FCFA</td>
+													<td>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star-o text-secondary"></i>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Deborah Assoumou</a>
+														</h2>
+													</td>
+													<td>Cardiologie</td>
+													<td>4000.00 FCFA</td>
+													<td>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star-o text-secondary"></i>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-04.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Sofia ONDO ONDO</a>
+														</h2>
+													</td>
+													<td>Urologie</td>
+													<td>3200.00 FCFA</td>
+													<td>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star-o text-secondary"></i>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-05.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Marvin Tchibinda</a>
+														</h2>
+													</td>
+													<td>Orthopediste</td>
+													<td>3500.00 FCFA</td>
+													<td>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star text-warning"></i>
+														<i class="fe fe-star-o text-secondary"></i>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Recent Orders -->
+							
+						</div>
+						<div class="col-md-6 d-flex">
+						
+							<!-- Feed Activity -->
+							<div class="card  card-table flex-fill">
+								<div class="card-header">
+									<h4 class="card-title">Liste des Patients</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>													
+													<th>Nom des Patients</th>
+													<th>Tél</th>
+													<th>Dernière Viste</th>
+													<th>Payé</th>													
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Nzeguet Miyama Audrey </a>
+														</h2>
+													</td>
+													<td>07286329170</td>
+													<td>20 Oct 2019</td>
+													<td class="text-right">10000.00 FCFA</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Travis Mayombo </a>
+														</h2>
+													</td>
+													<td>0620772999</td>
+													<td>22 Oct 2019</td>
+													<td class="text-right">20000.00 FCFA</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Carl Moussavou</a>
+														</h2>
+													</td>
+													<td>0626072769</td>
+													<td>21 Oct 2019</td>
+													<td class="text-right">25000.00 FCFA</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)"> Michelle Nzang</a>
+														</h2>
+													</td>
+													<td>0650436864</td>
+													<td>21 Sep 2019</td>
+													<td class="text-right">15000.00 FCFA</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Gina Maboundou</a>
+														</h2>
+													</td>
+													<td>07454820788</td>
+													<td>18 Sep 2019</td>
+													<td class="text-right">35000.00 FCFA</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Feed Activity -->
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+						
+							<!-- Recent Orders -->
+							<div class="card card-table">
+								<div class="card-header">
+									<h4 class="card-title">Liste des Rendez-Vous</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover table-center mb-0">
+											<thead>
+												<tr>
+													<th>Nom des Particiens</th>
+													<th>Spécialité</th>
+													<th>Nom du Patient</th>
+													<th>Heure du rendez-vous</th>
+													<th>Status</th>
+													<th class="text-right">Montant</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Diallo Boubacar</a>
+														</h2>
+													</td>
+													<td>Dentaire</td>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Nzeguet Miyama Audrey</a>
+														</h2>
+													</td>
+													<td>9 Nov 2019 <span class="text-primary d-block">11.00 AM - 11.15 AM</span></td>
+													<td>
+														<div class="status-toggle">
+															<input type="checkbox" id="status_1" class="check" checked>
+															<label for="status_1" class="checktoggle">checkbox</label>
+														</div>
+													</td>
+													<td class="text-right">
+														20000.00 FCFA 
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Fabrice Biyoghe</a>
+														</h2>
+													</td>
+													<td>Dentaire</td>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Travis Mayombo </a>
+														</h2>
+													</td>
+													
+													<td>5 Nov 2019 <span class="text-primary d-block">11.00 AM - 11.35 AM</span></td>
+													<td>
+														<div class="status-toggle">
+															<input type="checkbox" id="status_2" class="check" checked>
+															<label for="status_2" class="checktoggle">checkbox</label>
+														</div>
+													</td>
+													<td class="text-right">
+														30000.00 FCFA
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Deborah Assoumou</a>
+														</h2>
+													</td>
+													<td>Cardiologie</td>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Carl Moussavou</a>
+														</h2>
+													</td>
+													<td>11 Nov 2019 <span class="text-primary d-block">12.00 PM - 12.15 PM</span></td>
+													<td>
+														<div class="status-toggle">
+															<input type="checkbox" id="status_3" class="check" checked>
+															<label for="status_3" class="checktoggle">checkbox</label>
+														</div>
+													</td>
+													<td class="text-right">
+														15000.00 FCFA
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-04.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Sofia ONDO ONDO</a>
+														</h2>
+													</td>
+													<td>Urologie</td>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)"> Michelle Nzang</a>
+														</h2>
+													</td>
+													<td>7 Nov 2019<span class="text-primary d-block">1.00 PM - 1.20 PM</span></td>
+													<td>
+														<div class="status-toggle">
+															<input type="checkbox" id="status_4" class="check" checked>
+															<label for="status_4" class="checktoggle">checkbox</label>
+														</div>
+													</td>
+													<td class="text-right">
+														15000.00 FCFA
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-05.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Dr. Marvin Tchibinda</a>
+														</h2>
+													</td>
+													<td>Orthopediste</td>
+													<td>
+														<h2 class="table-avatar">
+															<a href="javascript:void(0)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
+															<a href="javascript:void(0)">Gina Maboundou</a>
+														</h2>
+													</td>
+													
+													<td>15 Nov 2019 <span class="text-primary d-block">1.00 PM - 1.15 PM</span></td>
+													<td>
+														<div class="status-toggle">
+															<input type="checkbox" id="status_5" class="check" checked>
+															<label for="status_5" class="checktoggle">checkbox</label>
+														</div>
+													</td>
+													<td class="text-right">
+														20000.00 FCFA
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- /Recent Orders -->
+							
+						</div>
+					</div>
+					
+				</div>			
+			</div>

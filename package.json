@@ -73,7 +73,6 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.5.1",
     "@types/node": "^12.11.1",
-    "angular-cli": "^1.0.0-beta.28.3",
     "codelyzer": "^5.1.2",
     "enhanced-resolve": "^3.3.0",
     "fancybox": "^3.0.1",

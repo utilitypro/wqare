@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng b --prod --aot=false --build-optimizer=false"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +34,7 @@
     "bootstrap": "^4.5.0",
     "datatables.net": "^1.10.21",
     "datatables.net-dt": "^1.10.21",
+    "express": "^4.17.1",
     "fullcalendar": "^5.1.0",
     "google-maps": "^4.3.2",
     "google-maps-infowindow": "0.0.1",
@@ -51,11 +53,13 @@
     "ngx-slick-carousel": "^0.5.1",
     "ngx-tags-input": "^2.0.1",
     "ngx-toastr": "^12.0.1",
+    "path": "^0.12.7",
     "rxjs": "~6.5.4",
     "select2": "^4.0.13",
     "slick-carousel": "^1.8.1",
     "snazzy-info-window": "^1.1.0",
     "tslib": "^1.10.0",
+    "typescript": "~3.8.3",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -69,6 +73,7 @@
     "@types/node": "^12.11.1",
     "angular-cli": "^1.0.0-beta.28.3",
     "codelyzer": "^5.1.2",
+    "enhanced-resolve": "^3.3.0",
     "fancybox": "^3.0.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -85,5 +90,9 @@
   "peerDependencies": {
     "@types/jquery": "^3.5.1",
     "jquery": "^3.5.1"
+  },
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.4.1"
   }
 }

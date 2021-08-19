@@ -61,6 +61,16 @@ export class CommonServiceService {
     this.message = new BehaviorSubject(this.messages)
   }
 
+  getLoggedInUser(auth_token): Observable<any> {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    })
+    // @ts-ignore
+    return this.http.get('https://www.googleapis.com/oauth2/v2/userinfo', { headers: headers })
+  }
+
+
   nextmessage(data) {
     this.message.next(data);
   }

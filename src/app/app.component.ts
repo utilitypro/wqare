@@ -14,11 +14,12 @@ import {
 } from '@angular/router';
 import { Location } from '@angular/common';
 import { CommonServiceService } from './common-service.service';
+import firebase from 'firebase/app';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  //changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
@@ -26,8 +27,8 @@ export class AppComponent implements OnInit {
   title = 'doccur';
   url;
   loadFooter = false;
-  show: boolean = true;
-  hideFooter: boolean = false;
+  show = true;
+  hideFooter = false;
   constructor(
     private activeRoute: ActivatedRoute,
     private cdr: ChangeDetectorRef,
@@ -80,6 +81,20 @@ export class AppComponent implements OnInit {
         this.hideFooter = false;
       }
     });
+
+    const config = {
+      apiKey: 'AIzaSyBB6Z6sOeI3y-NtiDsPTKwfkbXz7QshejI',
+      authDomain: 'tekkare-5f0d1.firebaseapp.com',
+      databaseURL: 'https://tekkare-5f0d1.firebaseio.com',
+      projectId: 'tekkare-5f0d1',
+      storageBucket: 'tekkare-5f0d1.appspot.com',
+      messagingSenderId: '922075743779',
+      appId: '1:922075743779:web:47fb67e1df6c43c5649396',
+      measurementId: 'G-JBMW224EC9'
+    };
+    // @ts-ignore
+    firebase.initializeApp(config);
+    //firebase.analytics();
   }
 
   ngOnInit() {

@@ -8,6 +8,11 @@ import { map, startWith } from 'rxjs/operators';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 declare const $: any;
 
+import firebase from 'firebase/app';
+
+import "firebase/auth";
+import 'firebase/firestore';
+
 export interface Doctors {
   id: number;
   doctor_name: string;
@@ -34,57 +39,8 @@ export class HomeComponent implements OnInit {
   blogs: any = [];
   keyword = 'name';
   searchDoctor = [];
-  public countries = [
-    {
-      id: 1,
-      name: 'Albania',
-      img: 'image',
-    },
-    {
-      id: 2,
-      name: 'Belgium',
-    },
-    {
-      id: 3,
-      name: 'Denmark',
-    },
-    {
-      id: 4,
-      name: 'Montenegro',
-    },
-    {
-      id: 5,
-      name: 'Turkey',
-    },
-    {
-      id: 6,
-      name: 'Ukraine',
-    },
-    {
-      id: 7,
-      name: 'Macedonia',
-    },
-    {
-      id: 8,
-      name: 'Slovenia',
-    },
-    {
-      id: 9,
-      name: 'Georgia',
-    },
-    {
-      id: 10,
-      name: 'India',
-    },
-    {
-      id: 11,
-      name: 'Russia',
-    },
-    {
-      id: 12,
-      name: 'Switzerland',
-    },
-  ];
+  public countries = [];
+
   constructor(
     public router: Router,
     public commonService: CommonServiceService
@@ -101,7 +57,9 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
     this.getspeciality();
     this.getDoctors();
+    this.getCountries();
     this.getblogs();
+
 
     // User's voice slider
     $('.testi-slider').each(function () {
@@ -311,40 +269,62 @@ export class HomeComponent implements OnInit {
   }
 
   getDoctors() {
-    this.commonService.getDoctors().subscribe((res) => {
-      this.doctors = res;
-      this.slidepage = {
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-            },
+    var db = firebase.firestore();
+    this.slidepage = {
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
           },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-            },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
           },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-            },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
           },
-        ],
-      };
-      this.countries = [];
-      this.doctors.forEach((index, i) => {
+        },
+      ],
+    };
+    this.searchDoctor = []
+    db.collection("doctors").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // @ts-ignore
+        this.searchDoctor.push({
+          id: doc.data().id,
+          name: doc.data().doctor_name,
+        });
+        this.doctors.push(doc.data())
+      });
+    }).catch((error)=>{
+      console.log(error);
+    });
+    console.log(this.searchDoctor)
+  }
+
+  getCountries() {
+    var db = firebase.firestore();
+    this.countries = []
+    db.collection("villes").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // @ts-ignore
         this.countries.push({
-          id: index.id,
-          name: index.doctor_name,
+          id: doc.data().id,
+          name: doc.data().nom,
         });
       });
+    }).catch((error)=>{
+      console.log(error);
     });
+    console.log(this.countries)
   }
 
   getblogs() {
@@ -353,9 +333,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  selectEvent(item) {
-    let filter = this.countries.filter((a) => a.name === item.name);
+  selectDoctorEvent(item) {
+    let filter = this.searchDoctor.filter((a) => a.name === item.name);
     this.router.navigateByUrl('/patients/doctor-profile?id=' + filter[0].id);
+    // do something with selected item
+  }
+
+  selectContryEvent(item) {
+    let filter = this.countries.filter((a) => a.name === item.name);
     // do something with selected item
   }
 

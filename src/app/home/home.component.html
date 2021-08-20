@@ -12,17 +12,25 @@
                 <div class="search-box">
                     <form>
                         <div class="form-group search-location">
-                        <input type="text" class="form-control" placeholder="OU ?">
+
+                          <ng-autocomplete [data]="countries" type="text" class="form-control"
+                                           [searchKeyword]="keyword" placeHolder="OU ?" (selected)='selectContryEvent($event)'
+                                           (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+                                           historyIdentifier="countries" [itemTemplate]="itemTemplate"
+                                           [notFoundTemplate]="notFoundTemplate">
+                          </ng-autocomplete>
+
+
                             <!--<span class="form-text">Based on your Location</span>-->
                         </div>
                         <div class="form-group search-info">
                             <!-- <input type="text" class="form-control"
                             placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc"/>
                         <span class="form-text">Ex : Dental or Sugar Check up etc</span> -->
-                            <ng-autocomplete [data]="countries" type="text" class="form-control"
-                                [searchKeyword]="keyword" placeHolder="Médecin, établissement, spécialité…" (selected)='selectEvent($event)'
+                            <ng-autocomplete [data]="searchDoctor" type="text" class="form-control"
+                                [searchKeyword]="keyword" placeHolder="Médecin, établissement, spécialité…" (selected)='selectDoctorEvent($event)'
                                 (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
-                                historyIdentifier="countries" [itemTemplate]="itemTemplate"
+                                historyIdentifier="doctors" [itemTemplate]="itemTemplate"
                                 [notFoundTemplate]="notFoundTemplate">
                             </ng-autocomplete>
 
@@ -91,7 +99,7 @@
                                 <button class="btn-prev" (click)="prev()"><i
                                         class="las la-caret-square-right"></i></button>
                             </div>
-                        
+
                         </div>
                     </div>
                     <!-- /Slider -->
@@ -122,7 +130,7 @@
                         <a href="javascript:;">Read More..</a>
                     </div>
                 </div>
-                <div class="col-lg-8">                    
+                <div class="col-lg-8">
                     <div class="doctor-slider">
                         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfigure">
                             <div class="slick-slide" *ngFor="let doctor of doctors;let i=index">
@@ -204,7 +212,7 @@
                             page when looking at its layout. </p>
                     </div>
                     <div class="features-slider slider">
-                        
+
                             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig2">
                                 <div ngxSlickItem *ngFor="let slide of sliderContent">
                                     <div class="feature-item text-center">
@@ -254,7 +262,7 @@
                                     </div>
                                 </li>
                                 <li><i class="far fa-clock"></i> {{blog.createdAt | date : 'dd MMM yyyy'}}</li>
-                            </ul> 
+                            </ul>
                             <h3 class="blog-title"><a [routerLink]="'/blog-details'"
                                     [queryParams]="{id: blog.id}">{{blog.title}}</a></h3>
                             <p class="mb-0 desc-ellipsis">{{blog.description}}</p>

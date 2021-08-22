@@ -19,7 +19,7 @@ export class DataService implements InMemoryDbService {
      {  id: 3,key:  "#SP003", speciality : 'Neurologie', img : "assets/img/specialities/specialities-02.png" },
      {  id: 4,key:  "#SP004", speciality : 'Cardiologie',img : "assets/img/specialities/specialities-04.png" },
      {  id: 5,key:  "#SP005", speciality : 'Dentiste',img:"assets/img/specialities/specialities-05.png" },
-     
+
     ];
 
     let appointments = [
@@ -379,7 +379,7 @@ export class DataService implements InMemoryDbService {
 			video_call : "15000 FCFA"
         }
     ]
- 
+
     let patients = [
       {
             id : "1",
@@ -548,7 +548,7 @@ export class DataService implements InMemoryDbService {
             bloodgroup : "A-",
             type : "Homme",
             img : "assets/img/patients/patient11.jpg"
-        }        
+        }
     ]
 
     let reviews = [
@@ -669,139 +669,201 @@ export class DataService implements InMemoryDbService {
 
   ]
 
-  let blogs = [
+    let blogs = [
+      {
+        id : 1,
+        title : "WQare – Simplifier vos visite en clinique?",
+        description : "Trouvez rapidement un spécialiste près de chez vous et prenez rendez-vous gratuitement en ligne en quelques clics.",
+        createdBy : "Dr. Deborah Assoumou",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces santé",
+        status : "active",
+        img : "assets/img/blog/blog-01.jpg",
+        doctor_name : "Dr. Ruby Mayindza",
+        doctor_pic : "assets/img/doctors/doctor-thumb-01.jpg"
+
+      },
+      {
+        id : 2,
+        title : "Pourquoi prendre rendez-vous avec un praticiens en ligne?",
+        description : "Nous vous expliquons simplement les raison de reserver un rendez-vous via notre application avec un praticien",
+        createdBy : "Dr. Deborah Assoumou",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-02.jpg",
+        doctor_name : "Dr. Darren Nguema",
+        doctor_pic : "assets/img/doctors/doctor-thumb-02.jpg"
+      },
+      {
+        id : 3,
+        title : "Avantages de consulter un médecin en ligne",
+        description : "Pourquoi la consultation en ligne prends de plus en plus de place et quels  en sont les avantages? pour en savoir plus lisez ce articles",
+        createdBy : "Dr. Deborah Assoumou",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-03.jpg",
+        doctor_name : "Dr. Deborah Assoumou",
+        doctor_pic : "assets/img/doctors/doctor-thumb-03.jpg"
+      },
+      {
+        id : 4,
+        title : "5 bonnes raisons d'utiliser un médecin en ligne",
+        description : "Sofia Vous resume en 5 points les avantages d'une consultation vidéo avec praticiens",
+        createdBy : "Dr. Sofia ONDO ONDO",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-04.jpg",
+        doctor_name : "Dr. Sofia ONDO ONDO",
+        doctor_pic : "assets/img/doctors/doctor-thumb-04.jpg"
+      },
+      {
+        id : 5,
+        title : "Planification de rendez-vous chez le médecin en ligne",
+        description : "Cet article va vous expliquer de manière comment planifier un suivi médicale en ligne de manière simple",
+        createdBy : "Dr. Sofia ONDO ONDO",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-05.jpg",
+        doctor_name : "Dr. Marvin  Tchibinda",
+        doctor_pic : "assets/img/doctors/doctor-thumb-05.jpg"
+      },
+      {
+        id : 6,
+        title : "Des étapes simples pour rendre vos visites chez le médecin exceptionnelles!",
+        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        createdBy : "Dr. Sofia ONDO ONDO",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-06.jpg",
+        doctor_name : "Dr. Katharine Nzang",
+        doctor_pic : "assets/img/doctors/doctor-thumb-06.jpg"
+      },
+      {
+        id : 7,
+        title : "Choisissez votre propre rendez-vous de médecin en ligne",
+        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        createdBy : "Dr. Sofia ONDO ONDO",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-07.jpg",
+        doctor_name : "Dr. Linda Tobin",
+        doctor_pic : "assets/img/doctors/doctor-thumb-07.jpg"
+      },
+      {
+        id : 8,
+        title : "Des étapes simples pour consulter votre médecin aujourd'hui",
+        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        createdBy : "Dr. Sofia ONDO ONDO",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-08.jpg",
+        doctor_name : "Dr. Paul Richard ",
+        doctor_pic : "assets/img/doctors/doctor-thumb-08.jpg"
+      },
+      {
+        id : 9,
+        title : "5 bonnes raisons d'utiliser un médecin en ligne",
+        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        createdBy : "Dr. Sofia ONDO ONDO",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-09.jpg",
+        doctor_name : "Dr. John Gibbs ",
+        doctor_pic : "assets/img/doctors/doctor-thumb-09.jpg"
+      },
+      {
+        id : 10,
+        title : "Programmes de doctorat en ligne",
+        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        createdBy : "Dr. Sofia ONDO ONDO",
+        createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
+        comments : 12,
+        type : "Astuces Santé",
+        status : "active",
+        img : "assets/img/blog/blog-10.jpg",
+        doctor_name : "Dr. Olga Mamadou",
+        doctor_pic : "assets/img/doctors/doctor-thumb-10.jpg"
+      }
+    ]
+
+
+    let advantages = [
   {
     id : 1,
-    title : "WQare – Simplifier vos visite en clinique?",
-    description : "Trouvez rapidement un spécialiste près de chez vous et prenez rendez-vous gratuitement en ligne en quelques clics.",
-    createdBy : "Dr. Deborah Assoumou",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces santé",
-    status : "active",
-    img : "assets/img/blog/blog-01.jpg",
-    doctor_name : "Dr. Ruby Mayindza",
-    doctor_pic : "assets/img/doctors/doctor-thumb-01.jpg"
+    title : "Gagnez du temps au quotidien",
+    first: "Prise de RDV en ligne 24h/24 et 7j/7",
+    firstImg:"fa fa-calendar",
+    secondImg: "fa fa-file",
+    descFirst: "Diminuer les sollicitations de vos patients qui gèrent leurs RDV de manière autonome.",
+    second: "Partage de documents en ligne",
+    descSecond: "Partagez vos ordonnances et autres documents médicales sur le compte en ligne de vos patients.",
+    third: "Echanger avec les patients",
+    thirdImg:"fa fa-comments",
+    descThird:"Prévenez vos patients par SMS ou email d’une annulation, d’un retard ou de consignes liées à leur RDV.",
+    img : "far fa-clock"
 
   },
-  {
-    id : 2,
-    title : "Pourquoi prendre rendez-vous avec un praticiens en ligne?",
-    description : "Nous vous expliquons simplement les raison de reserver un rendez-vous via notre application avec un praticien",
-    createdBy : "Dr. Deborah Assoumou",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-02.jpg",
-    doctor_name : "Dr. Darren Nguema",
-    doctor_pic : "assets/img/doctors/doctor-thumb-02.jpg"
-  },
-  {
-    id : 3,
-    title : "Avantages de consulter un médecin en ligne",
-    description : "Pourquoi la consultation en ligne prends de plus en plus de place et quels  en sont les avantages? pour en savoir plus lisez ce articles",
-    createdBy : "Dr. Deborah Assoumou",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-03.jpg",
-    doctor_name : "Dr. Deborah Assoumou",
-    doctor_pic : "assets/img/doctors/doctor-thumb-03.jpg"
-  },
+    {
+      id : 2,
+      title : "Optimiser la prise en charge de vos patients",
+      first: "Dossier médicale en ligne",
+      firstImg:"fa fa-folder-open",
+      secondImg: "fa fa-share-square",
+      descFirst: "Consulter et remplisser le dossier médicale de vos patients adultes en ligne via leur Dossier médical partagé",
+      second: "Recommandation en ligne",
+      descSecond: "Recommander à vos confrères, des patients  directement via votre compte en ligne.",
+      third: "Préparer vos consultation",
+      thirdImg:"fa fa-info",
+      descThird:"Communiquez toutes les consignes et informations nécessaire à une bonne prise en charge",
+      img : "fa fa-rocket"
+
+    },
+    {
+      id : 3,
+      title : "Développez l'activité de votre structure de santé",
+      first: "Rappel de RDV",
+      firstImg:"fa fa-search-minus",
+      secondImg: "fa fa-user-plus",
+      descFirst: "Réduisez le nombre de RDV manqués grâce aux rappels automatiques et capitalisez sur la liste d’attente.",
+      second: "Acquisition de nouveaux patients",
+      descSecond: "Recevez de nouveaux patients grâce à votre visibilité sur notre plateforme et au système de recommandation",
+      third: "Consultation vidéo (Bientôt dispo)",
+      thirdImg:"fa fa-play-circle",
+      descThird:"Proposez des consultations vidéo pour un suivi plus simple, sans contrainte de déplacement.",
+      img : "fa fa-hospital"
+    },
   {
     id : 4,
-    title : "5 bonnes raisons d'utiliser un médecin en ligne",
-    description : "Sofia Vous resume en 5 points les avantages d'une consultation vidéo avec praticiens",
-    createdBy : "Dr. Sofia ONDO ONDO",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-04.jpg",
-    doctor_name : "Dr. Sofia ONDO ONDO",
-    doctor_pic : "assets/img/doctors/doctor-thumb-04.jpg"
-  },
-  {
-    id : 5,
-    title : "Planification de rendez-vous chez le médecin en ligne",
-    description : "Cet article va vous expliquer de manière comment planifier un suivi médicale en ligne de manière simple",
-    createdBy : "Dr. Sofia ONDO ONDO",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-05.jpg",
-    doctor_name : "Dr. Marvin  Tchibinda",
-    doctor_pic : "assets/img/doctors/doctor-thumb-05.jpg"
-  },
-  {
-    id : 6,
-    title : "Des étapes simples pour rendre vos visites chez le médecin exceptionnelles!",
-    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    createdBy : "Dr. Sofia ONDO ONDO",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-06.jpg",
-    doctor_name : "Dr. Katharine Nzang",
-    doctor_pic : "assets/img/doctors/doctor-thumb-06.jpg"
-  },
-  {
-    id : 7,
-    title : "Choisissez votre propre rendez-vous de médecin en ligne",
-    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    createdBy : "Dr. Sofia ONDO ONDO",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-07.jpg",
-    doctor_name : "Dr. Linda Tobin",
-    doctor_pic : "assets/img/doctors/doctor-thumb-07.jpg"
-  },
-  {
-    id : 8,
-    title : "Des étapes simples pour consulter votre médecin aujourd'hui",
-    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    createdBy : "Dr. Sofia ONDO ONDO",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-08.jpg",
-    doctor_name : "Dr. Paul Richard ",
-    doctor_pic : "assets/img/doctors/doctor-thumb-08.jpg"
-  },
-   {
-    id : 9,
-    title : "5 bonnes raisons d'utiliser un médecin en ligne",
-    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    createdBy : "Dr. Sofia ONDO ONDO",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-09.jpg",
-    doctor_name : "Dr. John Gibbs ",
-    doctor_pic : "assets/img/doctors/doctor-thumb-09.jpg"
-  },
-   {
-    id : 10,
-    title : "Programmes de doctorat en ligne",
-    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris ullamco laborisut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    createdBy : "Dr. Sofia ONDO ONDO",
-    createdAt : "Mercredi 27 Mai 2020  09:41:48 ",
-    comments : 12,
-    type : "Astuces Santé",
-    status : "active",
-    img : "assets/img/blog/blog-10.jpg",
-    doctor_name : "Dr. Olga Mamadou",
-    doctor_pic : "assets/img/doctors/doctor-thumb-10.jpg"
+    title : "Gagnez en confort de travail",
+    first: "Agenda simple et intuitif",
+    firstImg:"fa fa-search-minus",
+    secondImg: "fa fa-retweet",
+    descFirst: "Prenez, déplacez ou annulez vos RDV en quelques clics grâce à nos fonctionnalités.",
+    second: "Rappels automatiques de RDV",
+    descSecond: "Diminuer vos rendez-vous non honorés grâce aux SMS/emails de rappel envoyés automatiquement à vos patients.",
+    third: "Application mobile (Bientôt dispo)",
+    thirdImg:"fa fa-mobile",
+    descThird:"Accédez à votre agenda où et quand vous le souhaitez, même en déplacement.",
+    img : "fa fa-thumbs-up"
   }
-] 
+]
 
   let transactions = [
       {
@@ -885,8 +947,9 @@ export class DataService implements InMemoryDbService {
           total_amount : '10000.00 FCFA',
           status : 'payé'
       }
+
   ]
-    return {transactions:transactions,comments:comments,favourites:favourites,blogs:blogs,specialityList:specialityList,appointments:appointments,doctors:doctors,patients:patients,reviews:reviews};
- 
+    return {transactions:transactions,comments:comments,favourites:favourites,advantages:advantages,blogs:blogs,specialityList:specialityList,appointments:appointments,doctors:doctors,patients:patients,reviews:reviews};
+
    }
 }

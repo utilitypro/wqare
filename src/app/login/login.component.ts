@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import {AuthService} from '../authService.service';
 import firebase from 'firebase/app';
 import "firebase/auth";
+import 'firebase/firestore';
 
 @Component({
   selector: 'app-login',

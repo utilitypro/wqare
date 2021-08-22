@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
   keyword = 'name';
   searchDoctor = [];
   public countries = [];
+  advantages: any = [];
 
   constructor(
     public router: Router,
@@ -59,6 +60,7 @@ export class HomeComponent implements OnInit {
     this.getDoctors();
     this.getCountries();
     this.getblogs();
+    this.getAdvantages();
 
 
     // User's voice slider
@@ -119,57 +121,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  slides = [
-    {
-      img: 'assets/img/specialities/specialities-05.png',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Dentiste',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/specialities/specialities-01.png',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Urologie',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/specialities/specialities-02.png',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Neurologue',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/specialities/specialities-03.png',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Orthopediste',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/specialities/specialities-04.png',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Cardiologue',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/specialities/specialities-05.png',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Dentiste',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/specialities/specialities-01.png',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Urologie',
-      position: 'CEO of VoidCoders',
-    },
-  ];
+  slides = [];
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 1,
@@ -263,8 +215,17 @@ export class HomeComponent implements OnInit {
   }
 
   getspeciality() {
-    this.commonService.getSpeciality().subscribe((res) => {
-      this.specialityList = res;
+    var db = firebase.firestore();
+    this.specialityList=[];
+    this.slides = [];
+    db.collection("specialities").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.specialityList.push(doc.data());
+        // @ts-ignore
+        this.slides.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
     });
   }
 
@@ -307,7 +268,6 @@ export class HomeComponent implements OnInit {
     }).catch((error)=>{
       console.log(error);
     });
-    console.log(this.searchDoctor)
   }
 
   getCountries() {
@@ -330,6 +290,12 @@ export class HomeComponent implements OnInit {
   getblogs() {
     this.commonService.getBlogs().subscribe((res) => {
       this.blogs = res;
+    });
+  }
+
+  getAdvantages() {
+    this.commonService.getAdvantages().subscribe((res) => {
+      this.advantages = res;
     });
   }
 
@@ -357,23 +323,19 @@ export class HomeComponent implements OnInit {
   sliderContent = [
     {
       img: 'assets/img/features/feature-01.jpg',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Patient Ward',
+      name: 'Gagnez du temps pour vous et/ou votre secrétaire',
       position: 'CEO of VoidCoders',
     },
     {
       img: 'assets/img/features/feature-02.jpg',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Test Room',
+      name: 'Secrétaires et assistant(e)s',
       position: 'CEO of VoidCoders',
     },
     {
       img: 'assets/img/features/feature-03.jpg',
       msg:
         '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'ICU',
+      name: 'Établissements de santé',
       position: 'CEO of VoidCoders',
     },
     {

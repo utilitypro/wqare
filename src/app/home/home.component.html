@@ -4,8 +4,8 @@
         <div class="container-fluid">
             <div class="banner-wrapper">
                 <div class="banner-header text-center">
-                    <h1>Chercher un médecin, prendre rendez-vous</h1>
-                    <p>Découvrez les meilleurs médecins, cliniques et hôpitaux de la ville les plus proche de chez vous.</p>
+                    <h1>Prendre rendez-vous</h1>
+                    <p>Consulter les disponibilités des praticiens et des établissements de santé</p>
                 </div>
 
                 <!-- Search -->
@@ -75,8 +75,8 @@
     <section class="section section-specialities">
         <div class="container-fluid">
             <div class="section-header text-center">
-                <h2>Clinique et spécialités</h2>
-                <p class="sub-title">Découvrer les domaines d'expertise de nos praticiens et spécialistes</p>
+                <h2>Prochaines disponibilités selon la spécialité</h2>
+                <p class="sub-title">WQare vous garantie de trouver un expert dans les domaines suivants </p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-9">
@@ -90,7 +90,7 @@
                                             <img src="{{slide.img}}" class="img-fluid" alt="Speciality">
                                             <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                         </div>
-                                        <p>{{slide.name}}</p>
+                                        <p>{{slide.speciality}}</p>
                                 </div>
                             </ngx-slick-carousel>
                             <div class="text-center client-navbtn">
@@ -111,129 +111,42 @@
     <!-- Clinic and Specialities -->
 
     <!-- popular section-->
-    <section class="section section-doctor">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="section-header ">
-                        <h2>Nos Praticiens</h2>
-                        <p>Planifier une consultation physique ou vidéo avec l'un de nos médécins</p>
-                    </div>
-                    <div class="about-content">
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a
-                            page
-                            when looking at its layout. The point of using Lorem Ipsum.</p>
-                        <p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem
-                            ipsum'
-                            will uncover many web sites still in their infancy. Various versions have evolved over the
-                            years, sometimes</p>
-                        <a href="javascript:;">Read More..</a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="doctor-slider">
-                        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfigure">
-                            <div class="slick-slide" *ngFor="let doctor of doctors;let i=index">
-                                <div ngxSlickItem>
-                                    <div class="profile-widget" style="width: 100%; display: inline-block;">
-                                        <div class="doc-img">
-                                            <a [routerLink]="'/patients/doctor-profile'"
-                                                [queryParams]="{id: doctor.id}" tabindex="-1">
-                                                <img class="img-fluid" alt="User Image" [src]="doctor.profile">
-                                            </a>
-                                            <a href="javascript:void(0)" class="fav-btn" tabindex="-1">
-                                                <i class="far fa-bookmark"></i>
-                                            </a>
-                                        </div>
-                                        <div class="pro-content">
-                                            <h3 class="title">
-                                                <a [routerLink]="'/patients/doctor-profile'"
-                                                    [queryParams]="{id: doctor.id}"
-                                                    tabindex="-1">{{doctor.doctor_name}}</a>
-                                                <i class="fas fa-check-circle verified"></i>
-                                            </h3>
-                                            <p class="speciality">{{doctor.Education}}</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(49)</span>
-                                            </div>
-                                            <ul class="available-info">
-                                                <li>
-                                                    <i class="fas fa-map-marker-alt"></i> {{doctor.Price}}
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-clock"></i> {{doctor.Available}}
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-money-bill-alt"></i> {{doctor.Price}}
-                                                    <i class="fas fa-info-circle" data-toggle="tooltip" title=""
-                                                        data-original-title="Lorem Ipsum"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="row row-sm">
-                                                <div class="col-6">
-                                                    <a [routerLink]="'/patients/doctor-profile'"
-                                                        [queryParams]="{id: doctor.id}" class="btn view-btn"
-                                                        tabindex="-1">View Profile</a>
-                                                </div>
-                                                <div class="col-6">
-                                                    <a [routerLink]="'/patients/booking'"
-                                                        [queryParams]="{id: doctor.id}" class="btn book-btn"
-                                                        tabindex="-1">Book
-                                                        Now</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ngx-slick-carousel>
-                    </div>
-                </div>
+   <!--popular section-->
+
+  <section class="section section-blogs">
+    <div class="container-fluid">
+
+      <!-- Section Header -->
+      <div class="section-header text-center">
+        <h2>Offre pour les  praticiens et établissements de santé</h2>
+        <p class="sub-title">Nous offrons ces fonctionnalités aux praticiens et structures sanitaires !!!</p>
+      </div>
+      <!-- /Section Header -->
+
+      <div class="row blog-grid-row">
+        <div class="col-md-6 col-lg-3 col-sm-12" *ngFor="let adv of advantages;let i=index" [hidden]="i>3">
+
+          <!-- Blog Post -->
+          <div class="blog grid-blog">
+            <div class="blog-content">
+              <h1 style="padding-left: 130px"><i style="color: #0de0fe" class="{{adv.img}}"></i></h1>
+              <h2 class="blog-title"><a>{{adv.title}}</a></h2>
+              <h6 class="mb-0 desc-ellipsis" style="padding-top: 10px"><i style="color: #0de0fe" class="{{adv.firstImg}}"></i> &nbsp; {{adv.first}}</h6>
+              <p style="padding-left: 25px; padding-top: 5px">{{adv.descFirst}}</p>
+              <h6 class="mb-0 desc-ellipsis" style="padding-top: 10px"><i style="color: #0de0fe" class="{{adv.secondImg}}"></i> &nbsp; {{adv.second}}</h6>
+              <p style="padding-left: 25px; padding-top: 5px">{{adv.descSecond}}</p>
+              <h6 class="mb-0 desc-ellipsis" style="padding-top: 10px"><i style="color: #0de0fe" class="{{adv.thirdImg}}"></i> &nbsp; {{adv.third}}</h6>
+              <p style="padding-left: 25px; padding-top: 5px">{{adv.descThird}}</p>
+
             </div>
+          </div>
+          <!-- /Blog Post -->
         </div>
-    </section>
-    <!--popular section-->
+      </div>
+    </div>
+  </section>
 
     <section class="section section-features">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-5 features-img">
-                    <img src="assets/img/features/feature.png" class="img-fluid" alt="Feature">
-                </div>
-                <div class="col-md-7">
-                    <div class="section-header">
-                        <h2 class="mt-2">Available Features in Our Clinic</h2>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout. </p>
-                    </div>
-                    <div class="features-slider slider">
-
-                            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig2">
-                                <div ngxSlickItem *ngFor="let slide of sliderContent">
-                                    <div class="feature-item text-center">
-                                    <img src="{{slide.img}}" class="img-fluid" alt="Feature">
-                                        <p>{{slide.name}}</p>
-                                    </div>
-                                </div>
-                            </ngx-slick-carousel>
-                            <!-- <div class="text-center client-navbtn">
-                                <button class="btn-next" (click)="nextslide()"><i
-                                        class="las la-caret-square-left"></i></button>
-                                <button class="btn-prev" (click)="prevslide()"><i
-                                        class="las la-caret-square-right"></i></button>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-
-    <section class="section section-blogs">
         <div class="container-fluid">
 
             <!-- Section Header -->

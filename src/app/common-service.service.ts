@@ -61,15 +61,6 @@ export class CommonServiceService {
     this.message = new BehaviorSubject(this.messages)
   }
 
-  getLoggedInUser(auth_token): Observable<any> {
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    })
-    // @ts-ignore
-    return this.http.get('https://www.googleapis.com/oauth2/v2/userinfo', { headers: headers })
-  }
-
 
   nextmessage(data) {
     this.message.next(data);
@@ -105,6 +96,10 @@ export class CommonServiceService {
 
   getDoctors() {
     return this.http.get(this.SERVER_URL + 'doctors');
+  }
+
+  getAdvantages() {
+    return this.http.get(this.SERVER_URL + 'advantages');
   }
 
   getDoctorDetails(id) {
@@ -195,4 +190,5 @@ export class CommonServiceService {
   deleteReview(id) {
     return this.http.delete(`${this.SERVER_URL + 'reviews'}/${id}`)
   }
+
 }

@@ -151,43 +151,40 @@
 
             <!-- Section Header -->
             <div class="section-header text-center">
-                <h2>Blogs and News</h2>
-                <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua.</p>
+                <h2>Conseils santé et Actualité</h2>
+                <!--<p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.</p>-->
             </div>
             <!-- /Section Header -->
 
             <div class="row blog-grid-row">
                 <div class="col-md-6 col-lg-3 col-sm-12" *ngFor="let blog of blogs;let i=index" [hidden]="i>3">
-
                     <!-- Blog Post -->
                     <div class="blog grid-blog">
                         <div class="blog-image">
-                            <a [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}"><img class="img-fluid"
-                                    [src]="blog.img" alt="Post Image"></a>
+                            <a [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}">
+                              <img class="img-fluid" [src]="blog.img" alt="Post Image">
+                            </a>
                         </div>
                         <div class="blog-content">
                             <ul class="entry-meta meta-item">
                                 <li>
                                     <div class="post-author">
-                                        <a [routerLink]="'/patients/doctor-profile'"><img [src]="blog.doctor_pic"
-                                                alt="Post Author"> <span>{{blog.doctor_name}}</span></a>
+                                        <a><img [src]="blog.doctor_pic"> <span>{{blog.createdBy}}</span></a>
                                     </div>
                                 </li>
-                                <li><i class="far fa-clock"></i> {{blog.createdAt | date : 'dd MMM yyyy'}}</li>
                             </ul>
-                            <h3 class="blog-title"><a [routerLink]="'/blog-details'"
+                          <h3 class="blog-title"><a [routerLink]="'/blog-details'"
                                     [queryParams]="{id: blog.id}">{{blog.title}}</a></h3>
                             <p class="mb-0 desc-ellipsis">{{blog.description}}</p>
                         </div>
                     </div>
-                    <!-- /Blog Post -->
 
+                  <!-- /Blog Post -->
                 </div>
-
             </div>
             <div class="view-all text-center">
-                <a [routerLink]="'/blog'" class="btn btn-primary">View All</a>
+                <a [routerLink]="'/blog'" class="btn btn-primary">Plus d'articles</a>
             </div>
         </div>
     </section>

@@ -32,7 +32,7 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   getBlogdetails() {
-    this.commonService.getBlogsDetails(1).subscribe((res) => {
+    this.commonService.getBlogsDetails(this.id).subscribe((res) => {
       this.blogdetails = res;
     });
   }

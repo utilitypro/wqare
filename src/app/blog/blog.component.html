@@ -5,28 +5,28 @@
 						<div class="col-md-12 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a [routerLink]="''">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Blog</li>
+									<li class="breadcrumb-item"><a [routerLink]="''">Accueil</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Actualité</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Blog List</h2>
+							<h2 class="breadcrumb-title">Conseils santé et Actualité</h2>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- /Breadcrumb -->
-			
+
 			<!-- Page Content -->
 			<div class="content">
 				<div class="container">
-             
+
 					<div class="row">
-					
+
 						<div class="col-lg-8 col-md-12">
 							<!-- Blog Post -->
-							<div class="blog" *ngFor="let blog of blogs | slice:0:4">
+							<div class="blog" *ngFor="let blog of blogs | slice:0:10">
 								<div class="blog-image">
-									<a  [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}"><img class="img-fluid" src="{{blog.img}}" alt="Post Image"></a>
+									<a  href="{{blog.url}}"  [target]="'_blank'"><img class="img-fluid" src="{{blog.img}}" alt="Post Image"></a>
 								</div>
 								<h3 class="blog-title"><a [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}">{{blog.title}}</a></h3>
 								<div class="blog-info clearfix">
@@ -34,23 +34,21 @@
 										<ul>
 											<li>
 												<div class="post-author">
-													<a  [routerLink]="'/patients/doctor-profile'"><img src="{{blog.doctor_pic}}" alt="Post Author"> <span>{{blog.doctor_name}}</span></a>
+													<a><img src="{{blog.doctor_pic}}" alt="Post Author"></a>
 												</div>
 											</li>
-											<li><i class="far fa-clock"></i>{{blog.createdAt | date: "d MMM yyyy"}}</li>
-											<li><i class="far fa-comments"></i>{{blog.comments}} Comments</li>
+											<li><i class="far fa-comments"></i>{{blog.comments}} Commentaires</li>
 											<li><i class="fa fa-tags"></i>{{blog.type}}</li>
 										</ul>
 									</div>
 								</div>
 								<div class="blog-content">
 									<p>{{blog.description}}</p>
-									<a  [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}" class="read-more">Read More</a>
 								</div>
 							</div>
 							<!-- /Blog Post -->
 
-							
+
 
 							<!-- Blog Pagination -->
 							<div class="row" *ngIf="blog">
@@ -79,9 +77,9 @@
 								</div>
 							</div>
 							<!-- /Blog Pagination -->
-							
+
 						</div>
-						
+
 						<!-- Blog Sidebar -->
 						<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
 
@@ -90,7 +88,7 @@
 								<div class="card-body">
 									<form class="search-form">
 										<div class="input-group">
-											<input type="text" placeholder="Search..." class="form-control">
+											<input type="text" placeholder="Chercher par thème" class="form-control">
 											<div class="input-group-append">
 												<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 											</div>
@@ -103,11 +101,11 @@
 							<!-- Latest Posts -->
 							<div class="card post-widget">
 								<div class="card-header">
-									<h4 class="card-title">Latest Posts</h4>
+									<h4 class="card-title">Derniers Articles</h4>
 								</div>
 								<div class="card-body">
 									<ul class="latest-posts">
-										<li *ngFor="let blog of blogs | slice:0:5">
+										<li *ngFor="let blog of blogs | slice:0:15">
 											<div class="post-thumb">
 												<a [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}">
 													<img class="img-fluid" [src]="blog.img" alt="">
@@ -117,10 +115,10 @@
 												<h4>
 													<a [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}">{{blog.title}}</a>
 												</h4>
-												<p> {{blog.createdAt | date : 'dd MMM yyyy'}}</p>
+												<p> publié le {{blog.createdAt | date : 'dd-MM-yyyy HH:mm'}}</p>
 											</div>
 										</li>
-										
+
 									</ul>
 								</div>
 							</div>
@@ -129,22 +127,25 @@
 							<!-- Categories -->
 							<div class="card category-widget">
 								<div class="card-header">
-									<h4 class="card-title">Blog Categories</h4>
+									<h4 class="card-title">Thèmes</h4>
 								</div>
 								<div class="card-body">
 									<ul class="categories">
-										<li><a href="javascript:void(0)">Cardiology <span>(62)</span></a></li>
-										<li><a href="javascript:void(0)">Health Care <span>(27)</span></a></li>
-										<li><a href="javascript:void(0)">Nutritions <span>(41)</span></a></li>
-										<li><a href="javascript:void(0)">Health Tips <span>(16)</span></a></li>
-										<li><a href="javascript:void(0)">Medical Research <span>(55)</span></a></li>
-										<li><a href="javascript:void(0)">Health Treatment <span>(07)</span></a></li>
-									</ul>
+										<li><a href="javascript:void(0)">Diabète <span>(62)</span></a></li>
+										<li><a href="javascript:void(0)">Paludisme <span>(27)</span></a></li>
+										<li><a href="javascript:void(0)">Cardio-vasculaire <span>(41)</span></a></li>
+										<li><a href="javascript:void(0)">Astuces Santé <span>(16)</span></a></li>
+										<li><a href="javascript:void(0)">Gynécologie <span>(55)</span></a></li>
+										<li><a href="javascript:void(0)">Covid-19 <span>(07)</span></a></li>
+                    <li><a href="javascript:void(0)">Femmes Enceintes <span>(07)</span></a></li>
+                    <li><a href="javascript:void(0)">Enfants <span>(07)</span></a></li>
+
+                  </ul>
 								</div>
 							</div>
 							<!-- /Categories -->
 
-							<!-- Tags -->
+							<!-- Tags
 							<div class="card tags-widget">
 								<div class="card-header">
 									<h4 class="card-title">Tags</h4>
@@ -173,14 +174,14 @@
 										<li><a href="javascript:void(0)" class="tag">Doccure</a></li>
 									</ul>
 								</div>
-							</div>
+							</div> -->
 							<!-- /Tags -->
-							
+
 						</div>
 						<!-- /Blog Sidebar -->
-						
+
 					</div>
 				</div>
 
-			</div>		
+			</div>
 			<!-- /Page Content -->

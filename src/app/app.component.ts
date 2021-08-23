@@ -92,9 +92,7 @@ export class AppComponent implements OnInit {
       appId: '1:922075743779:web:47fb67e1df6c43c5649396',
       measurementId: 'G-JBMW224EC9'
     };
-    // @ts-ignore
     firebase.initializeApp(config);
-    //firebase.analytics();
   }
 
   ngOnInit() {

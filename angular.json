@@ -31,7 +31,7 @@
               "node_modules/ng2-daterangepicker/assets/daterangepicker.css",
               "node_modules/fullcalendar/main.min.css",
               "node_modules/morris.js/morris.css"
-              
+
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -48,7 +48,7 @@
               "node_modules/slick-carousel/slick/slick.min.js",
               "node_modules/moment/min/moment.min.js",
               "node_modules/fullcalendar/main.min.js"
-              
+
             ]
           },
           "configurations": {
@@ -70,7 +70,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "4mb",
                   "maximumError": "5mb"
                 },
                 {

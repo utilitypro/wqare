@@ -1,5 +1,5 @@
 <!-- Breadcrumb -->
-			<div class="breadcrumb-bar">
+<div class="breadcrumb-bar">
 				<div class="container-fluid">
 					<div class="row align-items-center">
 						<div class="col-md-12 col-12">
@@ -83,19 +83,46 @@
 						<!-- Blog Sidebar -->
 						<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
 
-							<!-- Search -->
+							<!-- Search
 							<div class="card search-widget">
 								<div class="card-body">
 									<form class="search-form">
 										<div class="input-group">
-											<input type="text" placeholder="Chercher par thème" class="form-control">
+											<input type="text" placeholder="chercher par mots clés" class="form-control">
 											<div class="input-group-append">
 												<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 											</div>
 										</div>
 									</form>
 								</div>
-							</div>
+							</div>-->
+
+              <div class="card search-widget">
+              <div class="card-body">
+                <form class="search-form">
+              <div class="input-group">
+                <ng-autocomplete [data]="searchBlogs" type="text" class="form-control" #text
+                                 [searchKeyword]="keyword" placeHolder="chercher par mots clés" (selected)='selectBlogsEvent($event)'
+                                 (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+                                 historyIdentifier="searchBlogs" [itemTemplate]="itemTemplate"
+                                 [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.name"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+                <div class="input-group-append">
+                  <button (click)="searchBlog(text)" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+                </form>
+              </div>
+              </div>
+
 							<!-- /Search -->
 
 							<!-- Latest Posts -->
@@ -105,7 +132,7 @@
 								</div>
 								<div class="card-body">
 									<ul class="latest-posts">
-										<li *ngFor="let blog of blogs | slice:0:15">
+										<li *ngFor="let blog of blogsForCount | slice:0:15">
 											<div class="post-thumb">
 												<a [routerLink]="'/blog-details'" [queryParams]="{id: blog.id}">
 													<img class="img-fluid" [src]="blog.img" alt="">
@@ -132,7 +159,7 @@
 								<div class="card-body">
 									<ul class="categories">
                     <li *ngFor="let theme of themes | slice:0:10">
-                      <a href="javascript:void(0)">{{theme.name}} ({{countTheme(theme.name) }})</a>
+                      <a (click)="getBlogs(theme.name)">{{theme.name}} ({{countTheme(theme.name) }})</a>
                     </li>
 
                   </ul>

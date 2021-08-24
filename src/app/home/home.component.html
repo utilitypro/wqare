@@ -20,15 +20,10 @@
                                            [notFoundTemplate]="notFoundTemplate">
                           </ng-autocomplete>
 
-
-                            <!--<span class="form-text">Based on your Location</span>-->
                         </div>
                         <div class="form-group search-info">
-                            <!-- <input type="text" class="form-control"
-                            placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc"/>
-                        <span class="form-text">Ex : Dental or Sugar Check up etc</span> -->
                             <ng-autocomplete [data]="searchDoctor" type="text" class="form-control"
-                                [searchKeyword]="keyword" placeHolder="Médecin, établissement, spécialité…" (selected)='selectDoctorEvent($event)'
+                                [searchKeyword]="keyword" placeHolder="Médecin, établissement, spécialité …" (selected)='selectDoctorEvent($event)'
                                 (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
                                 historyIdentifier="doctors" [itemTemplate]="itemTemplate"
                                 [notFoundTemplate]="notFoundTemplate">
@@ -41,23 +36,6 @@
                             <ng-template #notFoundTemplate let-notFound>
                                 <div [innerHTML]="notFound"></div>
                             </ng-template>
-							 <!--<span class="form-text">Ex : Dental or Sugar Check up etc</span>-->
-
-                            <!-- <mat-form-field [floatLabel]="'never'" class="example-full-width" style="width: 100%">
-
-                            <input matInput type="text" class="form-control"
-                            placeholder="Search Doctors" [matAutocomplete]="auto" [formControl]="employeeCtrl">
-                             <span class="form-text">Dr.John</span>
-
-                            <mat-autocomplete #auto="matAutocomplete">
-                              <mat-option *ngFor="let doctor of filteredEmployee | async" [value]="doctor.doctor_name" [routerLink]="'/patients/doctor-profile'" [queryParams]="{id: doctor.id}">
-
-                                <img class="example-option-img" aria-hidden [src]="doctor.profile" height="25"> &nbsp;&nbsp;
-                                <span>{{doctor.doctor_name}}</span>
-                              </mat-option>
-                            </mat-autocomplete>
-
-                          </mat-form-field> -->
                         </div>
                         <button type="submit" class="btn btn-primary search-btn"
                             [routerLink]="'/patients/search-doctor'"><i class="fas fa-search"></i>

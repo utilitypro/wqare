@@ -271,6 +271,29 @@ export class HomeComponent implements OnInit {
     }).catch((error)=>{
       console.log(error);
     });
+
+    this.db.collection("specialities").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // @ts-ignore
+        this.searchDoctor.push({
+          id: doc.data().id,
+          name: doc.data().speciality,
+        });
+      });
+    }).catch((error)=>{
+      console.log(error);
+    });
+
+    this.db.collection("structures").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.searchDoctor.push({
+          id: doc.data().id,
+          name: doc.data().structure,
+        });
+      });
+    }).catch((error)=>{
+      console.log(error);
+    });
   }
 
   getCountries() {

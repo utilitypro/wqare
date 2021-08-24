@@ -17,6 +17,7 @@ import {query} from '@angular/animations';
 export class BlogDetailsComponent implements OnInit {
   id;
   blogdetails: any = [];
+  blogsForCount: any = [];
   blogs: any = [];
   themes: any = [];
   comments: any = [];
@@ -65,6 +66,7 @@ export class BlogDetailsComponent implements OnInit {
     this.db.collection("blogs").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         this.blogs.push(doc.data());
+        this.blogsForCount.push(doc.data());
       });
     }).catch((error)=>{
       console.log(error);
@@ -110,7 +112,7 @@ export class BlogDetailsComponent implements OnInit {
 
   countTheme(type){
     var count= 0;
-    this.blogs.forEach((post) => {
+    this.blogsForCount.forEach((post) => {
       if(post.type == type){
         count++;
       }
@@ -128,6 +130,10 @@ export class BlogDetailsComponent implements OnInit {
       }
     });
     return count;
+  }
+
+  nav(theme){
+    this.router.navigateByUrl('/blog?name=' + theme);
   }
 
 }

@@ -159,7 +159,7 @@
 								</div>
 								<div class="card-body">
 									<ul class="latest-posts">
-										<li *ngFor="let blog of blogs | slice:0:15">
+										<li *ngFor="let blog of blogsForCount | slice:0:15">
 											<div class="post-thumb">
 												<a style="cursor: pointer;" (click)="navigate(blog)">
 													<img class="img-fluid" [src]="blog.img" alt="">
@@ -185,7 +185,7 @@
 								<div class="card-body">
 									<ul class="categories">
                     <li *ngFor="let theme of themes | slice:0:10">
-                    <a href="javascript:void(0)">{{theme.name}} ({{countTheme(theme.name) }})</a>
+                    <a (click)="nav(theme.name)">{{theme.name}} ({{countTheme(theme.name) }})</a>
                     </li>
 									</ul>
 								</div>

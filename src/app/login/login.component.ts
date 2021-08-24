@@ -15,11 +15,13 @@ import 'firebase/firestore';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  isPatient: boolean = false;
+  isPraticien: boolean = false;
   doctors: any = [];
   patients: any = [];
   username = '';
   password = '';
+  public db = firebase.firestore();
+
   constructor(
     public router: Router,
     public commonService: CommonServiceService,
@@ -33,12 +35,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getpatients();
-    this.getDoctors();
   }
 
   checkType(event) {
-    this.isPatient = event.target.checked ? true : false;
+    this.isPraticien = event.target.checked ? true : false;
   }
 
   loginByFacebook(){
@@ -50,9 +50,10 @@ export class LoginComponent implements OnInit {
         var token = result.credential.accessToken;
         var user = result.user;
 
-        if (self.isPatient) {
+        if (!self.isPraticien) {
           localStorage.setItem('auth', 'true');
-          localStorage.setItem('patient', self.isPatient.toString());
+          localStorage.setItem('patient', self.isPraticien.toString());
+          localStorage.setItem('id', user.email);
           //localStorage.setItem('id', filter[0]['id']);
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('patientLogin');
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
           self.router.navigate(['/patients/dashboard']);
         }else{
           localStorage.setItem('auth', 'true');
-          //localStorage.setItem('id', filter[0]['id']);
+          localStorage.setItem('id', user.email);
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('doctorLogin');
           //window.location.reload();
@@ -86,17 +87,17 @@ export class LoginComponent implements OnInit {
       var token = result.credential.accessToken;
       var user = result.user;
 
-      if (self.isPatient) {
+      if (!self.isPraticien) {
         localStorage.setItem('auth', 'true');
-        localStorage.setItem('patient', self.isPatient.toString());
-        //localStorage.setItem('id', filter[0]['id']);
+        localStorage.setItem('patient', self.isPraticien.toString());
+        localStorage.setItem('id', user.email);
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('patientLogin');
         //window.location.reload();
         self.router.navigate(['/patients/dashboard']);
       }else{
         localStorage.setItem('auth', 'true');
-        //localStorage.setItem('id', filter[0]['id']);
+        localStorage.setItem('id', user.email);
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('doctorLogin');
        // window.location.reload();
@@ -115,34 +116,33 @@ export class LoginComponent implements OnInit {
   }
 
   login(name, password) {
-      if (this.isPatient) {
+      if (!this.isPraticien) {
         this.authservice.signInUser(name, password).then(
           () => {
             if(firebase.auth().currentUser.emailVerified) {
               localStorage.setItem('auth', 'true');
-              localStorage.setItem('patient', this.isPatient.toString());
+              localStorage.setItem('praticien', this.isPraticien.toString());
               //localStorage.setItem('id', filter[0]['id']);
               this.toastr.success('', 'Login success!');
               //this.commonService.nextmessage('patientLogin');
-              window.location.reload();
-              //this.router.navigate(['/patients/dashboard']);
+              this.router.navigate(['/patients/dashboard']);
             }else {
               this.toastr.error('Please validate your email adress!', 'Login failed!');
             }
           },
           () => {
-            this.toastr.error('email/password is incorect', 'Login failed!');
+            this.toastr.error('email/password  incorect', 'echec authentification !');
           }
         );
       } else {
         this.authservice.signInUser(name, password).then(
           () => {
             localStorage.setItem('auth', 'true');
-            //localStorage.setItem('id', filter[0]['id']);
+            localStorage.setItem('id', name);
+            localStorage.setItem('praticien', this.isPraticien.toString());
             this.toastr.success('', 'Login success!');
             //this.commonService.nextmessage('doctorLogin');
-            window.location.reload();
-            //this.router.navigate(['/doctor/dashboard']);
+            this.router.navigate(['/doctor/dashboard']);
           },
           () => {
             this.toastr.error('', 'Login failed!');
@@ -153,14 +153,24 @@ export class LoginComponent implements OnInit {
   }
 
   getDoctors() {
-    this.commonService.getDoctors().subscribe((res) => {
-      this.doctors = res;
+    this.doctors=[];
+    this.db.collection("doctors").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.doctors.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
     });
   }
 
   getpatients() {
-    this.commonService.getpatients().subscribe((res) => {
-      this.patients = res;
+    this.patients=[];
+    this.db.collection("patients").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.patients.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
     });
   }
 
@@ -168,13 +178,13 @@ export class LoginComponent implements OnInit {
     this.authservice.signInUser(name, password).then(
       ()=>{
         localStorage.setItem('auth', 'true');
-        localStorage.setItem(profil, this.isPatient.toString());
-        //localStorage.setItem('id', filter[0]['id']);
-        this.toastr.success('', 'Login success!');
+        localStorage.setItem(profil, this.isPraticien.toString());
+        localStorage.setItem('id', name);
+        this.toastr.success('', 'authentification reussi!');
         this.router.navigate(['/patients/dashboard']);
       },
       ()=>{
-        this.toastr.error('', 'Login failed!');
+        this.toastr.error('', 'Echec authentification!');
       }
     );
   }

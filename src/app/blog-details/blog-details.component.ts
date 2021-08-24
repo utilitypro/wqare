@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CommonServiceService } from '../common-service.service';
 import { ToastrService } from 'ngx-toastr';
+import firebase from 'firebase/app';
+
+import "firebase/auth";
+import 'firebase/firestore';
+import {query} from '@angular/animations';
+
 
 @Component({
   selector: 'app-blog-details',
@@ -12,10 +18,15 @@ export class BlogDetailsComponent implements OnInit {
   id;
   blogdetails: any = [];
   blogs: any = [];
+  themes: any = [];
   comments: any = [];
+  postComments: any = [];
   name = '';
   email = '';
   usercomment = '';
+  public db = firebase.firestore();
+  size =0;
+
   constructor(
     private toastr: ToastrService,
     public commonService: CommonServiceService,
@@ -28,7 +39,19 @@ export class BlogDetailsComponent implements OnInit {
     this.getBlogdetails();
     this.getBlogs();
     this.getComments();
+    this.getThemes();
     window.scrollTo(0, 0);
+  }
+
+  getThemes(){
+    this.themes=[];
+    this.db.collection("themes").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.themes.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
+    });
   }
 
   getBlogdetails() {
@@ -38,14 +61,24 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   getBlogs() {
-    this.commonService.getBlogs().subscribe((result) => {
-      this.blogs = result;
+    this.blogs=[];
+    this.db.collection("blogs").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.blogs.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
     });
   }
 
   getComments() {
-    this.commonService.getComments().subscribe((result) => {
-      this.comments = result;
+    this.comments=[];
+    this.db.collection("comments").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.comments.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
     });
   }
 
@@ -74,4 +107,27 @@ export class BlogDetailsComponent implements OnInit {
       });
     }
   }
+
+  countTheme(type){
+    var count= 0;
+    this.blogs.forEach((post) => {
+      if(post.type == type){
+        count++;
+      }
+    });
+    return count;
+  }
+
+  countCommentByPost(postId){
+    var count= 0;
+    this.postComments= [];
+    this.comments.forEach((post) => {
+      if(post.id == postId){
+        this.postComments.push(post);
+        count++;
+      }
+    });
+    return count;
+  }
+
 }

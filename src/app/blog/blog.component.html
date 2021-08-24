@@ -37,7 +37,7 @@
 													<a><img src="{{blog.doctor_pic}}" alt="Post Author"></a>
 												</div>
 											</li>
-											<li><i class="far fa-comments"></i>{{blog.comments}} Commentaires</li>
+											<li><i class="far fa-comments"></i>{{countCommentByPost(blog.id)}} Commentaires</li>
 											<li><i class="fa fa-tags"></i>{{blog.type}}</li>
 										</ul>
 									</div>
@@ -131,14 +131,9 @@
 								</div>
 								<div class="card-body">
 									<ul class="categories">
-										<li><a href="javascript:void(0)">Diabète <span>(62)</span></a></li>
-										<li><a href="javascript:void(0)">Paludisme <span>(27)</span></a></li>
-										<li><a href="javascript:void(0)">Cardio-vasculaire <span>(41)</span></a></li>
-										<li><a href="javascript:void(0)">Astuces Santé <span>(16)</span></a></li>
-										<li><a href="javascript:void(0)">Gynécologie <span>(55)</span></a></li>
-										<li><a href="javascript:void(0)">Covid-19 <span>(07)</span></a></li>
-                    <li><a href="javascript:void(0)">Femmes Enceintes <span>(07)</span></a></li>
-                    <li><a href="javascript:void(0)">Enfants <span>(07)</span></a></li>
+                    <li *ngFor="let theme of themes | slice:0:10">
+                      <a href="javascript:void(0)">{{theme.name}} ({{countTheme(theme.name) }})</a>
+                    </li>
 
                   </ul>
 								</div>

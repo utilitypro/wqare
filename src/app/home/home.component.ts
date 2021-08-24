@@ -6,12 +6,16 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+// @ts-ignore
+import moment from 'moment';
+
 declare const $: any;
 
 import firebase from 'firebase/app';
 
 import "firebase/auth";
 import 'firebase/firestore';
+import {getTime} from 'ngx-bootstrap/chronos/utils/date-getters';
 
 export interface Doctors {
   id: number;
@@ -41,6 +45,7 @@ export class HomeComponent implements OnInit {
   searchDoctor = [];
   public countries = [];
   advantages: any = [];
+  public db = firebase.firestore();
 
   constructor(
     public router: Router,
@@ -215,10 +220,9 @@ export class HomeComponent implements OnInit {
   }
 
   getspeciality() {
-    var db = firebase.firestore();
     this.specialityList=[];
     this.slides = [];
-    db.collection("specialities").get().then((querySnapshot) => {
+    this.db.collection("specialities").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         this.specialityList.push(doc.data());
         // @ts-ignore
@@ -230,7 +234,6 @@ export class HomeComponent implements OnInit {
   }
 
   getDoctors() {
-    var db = firebase.firestore();
     this.slidepage = {
       slidesToShow: 5,
       slidesToScroll: 1,
@@ -256,7 +259,7 @@ export class HomeComponent implements OnInit {
       ],
     };
     this.searchDoctor = []
-    db.collection("doctors").get().then((querySnapshot) => {
+    this.db.collection("doctors").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         // @ts-ignore
         this.searchDoctor.push({
@@ -271,9 +274,8 @@ export class HomeComponent implements OnInit {
   }
 
   getCountries() {
-    var db = firebase.firestore();
     this.countries = []
-    db.collection("villes").get().then((querySnapshot) => {
+    this.db.collection("villes").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         // @ts-ignore
         this.countries.push({
@@ -284,18 +286,29 @@ export class HomeComponent implements OnInit {
     }).catch((error)=>{
       console.log(error);
     });
-    console.log(this.countries)
   }
 
   getblogs() {
-    this.commonService.getBlogs().subscribe((res) => {
-      this.blogs = res;
+    this.blogs = []
+    this.db.collection("blogs").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // @ts-ignore
+        this.blogs.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
     });
   }
 
   getAdvantages() {
-    this.commonService.getAdvantages().subscribe((res) => {
-      this.advantages = res;
+    this.advantages = []
+    this.db.collection("advantages").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        // @ts-ignore
+        this.advantages.push(doc.data());
+      });
+    }).catch((error)=>{
+      console.log(error);
     });
   }
 
@@ -319,54 +332,6 @@ export class HomeComponent implements OnInit {
     // do something
   }
 
-  //// next step 2
-  sliderContent = [
-    {
-      img: 'assets/img/features/feature-01.jpg',
-      name: 'Gagnez du temps pour vous et/ou votre secrétaire',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/features/feature-02.jpg',
-      name: 'Secrétaires et assistant(e)s',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/features/feature-03.jpg',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Établissements de santé',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/features/feature-04.jpg',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Laboratory',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/features/feature-05.jpg',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Operation',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/features/feature-06.jpg',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Medical',
-      position: 'CEO of VoidCoders',
-    },
-    {
-      img: 'assets/img/features/feature-05.jpg',
-      msg:
-        '"Lorem Ipsum is simply dummy text of the printing and typesetting industry."',
-      name: 'Patient Ward',
-      position: 'CEO of VoidCoders',
-    },
-  ];
   slideConfigure = {
     dots: false,
     autoplay: false,

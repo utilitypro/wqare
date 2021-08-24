@@ -660,13 +660,29 @@ export class DataService implements InMemoryDbService {
       "name" : "Michelle Nzang",
       "email" : "Nzang@example.com",
       "comment" : "Conseil et écoute de qualité, je recommande",
-      "date": "22-08-2021 17:17"
+      "date": "22-08-2021 17:17",
+      "article-id": 1
     },
     {
       "name" : "Elsie Bie",
       "email" : "Nzang@example.com",
       "comment" : "Je suis très satisfaite de la prestation et de l'accompagnement tout au long du processus",
-      "date": "22-08-2021 17:18"
+      "date": "22-08-2021 17:18",
+      "article-id": 2
+    },
+    {
+      "name" : "Michelle Nzang",
+      "email" : "Nzang@example.com",
+      "comment" : "Conseil et écoute de qualité, je recommande",
+      "date": "22-08-2021 17:17",
+      "article-id": 3
+    },
+    {
+      "name" : "Elsie Bie",
+      "email" : "Nzang@example.com",
+      "comment" : "Je suis très satisfaite de la prestation et de l'accompagnement tout au long du processus",
+      "date": "22-08-2021 17:18",
+      "article-id": 4
     }
 
   ]

@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import 'firebase/firestore';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-blog',
@@ -12,7 +13,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  name= null;
+  name;
+  filter = null;
   blogs: any = [];
   searchFilter: any =[];
   blogsForCount: any = [];
@@ -21,12 +23,16 @@ export class BlogComponent implements OnInit {
   themes: any = [];
   firstBlock: any = [];
   keyword = 'name';
+
   public db = firebase.firestore();
 
   constructor(public commonService: CommonServiceService,
               private route: ActivatedRoute,
-              public router: Router
-  ) {}
+              public router: Router,
+              private toastr: ToastrService,
+
+  ) {
+  }
 
   ngOnInit(): void {
     this.name = this.route.snapshot.queryParams['name'];
@@ -42,35 +48,33 @@ export class BlogComponent implements OnInit {
     this.blogs = [];
     this.searchBlogs = [];
     var query = this.db.collection("blogs");
-      this.blogsForCount = [];
-      query.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.blogsForCount.push(doc.data());
-          this.searchBlogs.push({
-            id: doc.data().id,
-            name: doc.data().title,
-          })
-        });
-      }).catch((error) => {
-        console.log(error);
+    this.blogsForCount = [];
+    query.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.blogsForCount.push(doc.data());
+        this.searchBlogs.push({
+          id: doc.data().id,
+          name: doc.data().title,
+        })
       });
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   getBlogs(type) {
-    this.blogs=[];
-    console.log(this.searchFilter);
-    if(this.searchFilter.length == 0) {
-      var query = this.db.collection("blogs");
       if (type == null || type == "undefined") {
-        query.get().then((querySnapshot) => {
+        this.blogs=[];
+        this.db.collection("blogs").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             this.blogs.push(doc.data());
           });
         }).catch((error) => {
           console.log(error);
         });
-      } else {
-        query.where("type", "==", type).get().then((querySnapshot) => {
+      }else{
+        this.blogs=[];
+        this.db.collection("blogs").where("type", "==", type).get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             this.blogs.push(doc.data());
           });
@@ -79,9 +83,6 @@ export class BlogComponent implements OnInit {
         });
         this.router.navigate(['/blog']);
       }
-    }else{
-      this.blogs = this.searchFilter;
-    }
   }
 
   getBlogdetails() {
@@ -139,13 +140,23 @@ export class BlogComponent implements OnInit {
   }
 
   searchBlog(text){
-    /*this.blogs=[];
-    this.blogsForCount.forEach((a) => {
-      if(a.title.includes(text)|| a.description.includes(text)|| a.type.includes(text)){
-        this.searchBlogs.push(a);
+    var search = [];
+    if(text.query == ""){
+      this.toastr.info("Veuillez saisir votre recherche !!")
+    }else {
+      this.blogsForCount.forEach((a) => {
+        if (a.title.includes(text.query)) {
+          search.push(a);
+        }
+      });
+      if (search.length == 0) {
+        this.toastr.info("Pas de resultat pour votre recherche !!")
+      } else {
+        this.blogs = [];
+        this.blogs = search;
+        this.router.navigate(['/blog']);
       }
-    });
-    this.router.navigateByUrl('/blog');*/
+    }
 
   }
 
@@ -160,4 +171,7 @@ export class BlogComponent implements OnInit {
   }
 
 
+  setTrue() {
+    return true;
+  }
 }

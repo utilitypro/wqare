@@ -7361,91 +7361,113 @@ html.menu-opened body {
 }
 
 @media only screen and (max-width:479px) {
-	.section-search {
-		min-height: 410px;
-		padding: 30px 15px;
-	}
-	.specialities-slider .slick-slide {
-		margin-right: 10px;
-	}
-	.speicality-img {
-		width: 120px;
-		height: 120px;
-	}
-	.speicality-img img {
-		width: 50px;
-	}
-	.clinic-booking a.view-pro-btn {
-		width: 100%;
-		margin-bottom: 15px;
-	}
-	.clinic-booking a.apt-btn {
-		width: 100%;
-	}
-	.chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-name,
-	.chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-last-chat {
-		max-width: 160px;
-	}
-	.section-features, .section-features, .section-specialities {
-		background-color: #fff;
-		padding: 30px 0;
-	}
-	.login-header h3 a {
-		color: #0de0fe;
-		float: none;
-		font-size: 15px;
-		margin-top: 10px;
-		text-align: center;
-		display: block;
-	}
-	.login-header h3 {
-		text-align: center;
-	}
-	.appointments .appointment-list {
-		text-align: center;
-	}
-	.appointment-list .profile-info-widget {
-		-ms-flex-direction: column;
-		flex-direction: column;
-	}
-	.appointment-list .profile-info-widget {
-		text-align: center;
-	}
-	.appointment-list .profile-info-widget .booking-doc-img {
-		margin: 0 0 15px;
-	}
-	.appointment-list .profile-info-widget .booking-doc-img img {
-		border-radius: 50%;
-		height: 100px;
-		width: 100px;
-	}
-	.appointment-list .profile-det-info {
-		margin-bottom: 15px;
-	}
-	.appointments .appointment-action {
-		margin-top: 0;
-	}
-	.user-tabs .nav-tabs .nav-item {
-		-ms-flex: 0 0 100%;
-		flex: 0 0 100%;
-	}
-	.review-listing .recommend-btn span {
-		display: block;
-		margin-bottom: 10px;
-	}
-	.review-listing > ul li .comments-reply {
-		margin-left: 0;
-	}
-	.schedule-nav .nav-tabs li {
-		display: block;
-		-ms-flex: 0 0 100%;
-		flex: 0 0 100%;
-		margin-right: 0;
-	}
-	.fc-header-toolbar .fc-left {
-		margin-bottom: 10px;
-	}
-	.fc-header-toolbar .fc-right {
-		margin-bottom: 10px;
-	}
+  .section-search {
+    min-height: 410px;
+    padding: 30px 15px;
+  }
+
+  .specialities-slider .slick-slide {
+    margin-right: 10px;
+  }
+
+  .speicality-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .speicality-img img {
+    width: 50px;
+  }
+
+  .clinic-booking a.view-pro-btn {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .clinic-booking a.apt-btn {
+    width: 100%;
+  }
+
+  .chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-name,
+  .chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-last-chat {
+    max-width: 160px;
+  }
+
+  .section-features, .section-features, .section-specialities {
+    background-color: #fff;
+    padding: 30px 0;
+  }
+
+  .login-header h3 a {
+    color: #0de0fe;
+    float: none;
+    font-size: 15px;
+    margin-top: 10px;
+    text-align: center;
+    display: block;
+  }
+
+  .login-header h3 {
+    text-align: center;
+  }
+
+  .appointments .appointment-list {
+    text-align: center;
+  }
+
+  .appointment-list .profile-info-widget {
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .appointment-list .profile-info-widget {
+    text-align: center;
+  }
+
+  .appointment-list .profile-info-widget .booking-doc-img {
+    margin: 0 0 15px;
+  }
+
+  .appointment-list .profile-info-widget .booking-doc-img img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+  }
+
+  .appointment-list .profile-det-info {
+    margin-bottom: 15px;
+  }
+
+  .appointments .appointment-action {
+    margin-top: 0;
+  }
+
+  .user-tabs .nav-tabs .nav-item {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+
+  .review-listing .recommend-btn span {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .review-listing > ul li .comments-reply {
+    margin-left: 0;
+  }
+
+  .schedule-nav .nav-tabs li {
+    display: block;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    margin-right: 0;
+  }
+
+  .fc-header-toolbar .fc-left {
+    margin-bottom: 10px;
+  }
+
+  .fc-header-toolbar .fc-right {
+    margin-bottom: 10px;
+  }
 }

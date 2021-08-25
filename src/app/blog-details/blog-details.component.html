@@ -1,5 +1,5 @@
-	<!-- Breadcrumb -->
-			<div class="breadcrumb-bar">
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
 				<div class="container-fluid">
 					<div class="row align-items-center">
 						<div class="col-md-12 col-12">
@@ -141,12 +141,25 @@
 							<div class="card search-widget">
 								<div class="card-body">
 									<form class="search-form">
-										<div class="input-group">
-											<input type="text" placeholder="Chercher par thème" class="form-control">
-											<div class="input-group-append">
-												<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-											</div>
-										</div>
+                    <div class="input-group">
+                      <ng-autocomplete [data]="searchBlogs" type="text" class="form-control" #text
+                                       [searchKeyword]="keyword" placeHolder="chercher par mots clés" (selected)='selectBlogsEvent($event)'
+                                       (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+                                       historyIdentifier="searchBlogs" [itemTemplate]="itemTemplate"
+                                       [notFoundTemplate]="notFoundTemplate">
+                      </ng-autocomplete>
+
+                      <ng-template #itemTemplate  let-item >
+                        <a [innerHTML]="item.name" ></a>
+                      </ng-template>
+
+                      <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="'aucun resultat'"></div>
+                      </ng-template>
+                      <!--<div class="input-group-append">
+                        <a [style]="'color: white'" (click)="searchBlog(text)" class="btn btn-primary"><i class="fa fa-search"></i></a>
+                      </div>-->
+                    </div>
 									</form>
 								</div>
 							</div>

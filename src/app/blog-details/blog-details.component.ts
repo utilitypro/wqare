@@ -25,6 +25,8 @@ export class BlogDetailsComponent implements OnInit {
   name = '';
   email = '';
   usercomment = '';
+  keyword = 'name';
+  searchBlogs: any = [];
   public db = firebase.firestore();
   size =0;
 
@@ -41,6 +43,7 @@ export class BlogDetailsComponent implements OnInit {
     this.getBlogs();
     this.getComments();
     this.getThemes();
+    this.getBlogsForCount();
     window.scrollTo(0, 0);
   }
 
@@ -66,9 +69,26 @@ export class BlogDetailsComponent implements OnInit {
     this.db.collection("blogs").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         this.blogs.push(doc.data());
-        this.blogsForCount.push(doc.data());
       });
     }).catch((error)=>{
+      console.log(error);
+    });
+  }
+
+  getBlogsForCount() {
+    this.blogs = [];
+    this.searchBlogs = [];
+    var query = this.db.collection("blogs");
+    this.blogsForCount = [];
+    query.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.blogsForCount.push(doc.data());
+        this.searchBlogs.push({
+          id: doc.data().id,
+          name: doc.data().title,
+        })
+      });
+    }).catch((error) => {
       console.log(error);
     });
   }
@@ -134,6 +154,25 @@ export class BlogDetailsComponent implements OnInit {
 
   nav(theme){
     this.router.navigateByUrl('/blog?name=' + theme);
+  }
+
+  selectBlogsEvent(item) {
+    let filter = this.blogsForCount.filter((a) => a.title === item.name);
+    this.router.navigate(['/blog-details?id=' + filter[0].id]);
+    window.location.href = '/blog-details?id=' + filter[0].id;
+
+    // do something with selected item
+  }
+
+
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    // do something
   }
 
 }

@@ -158,10 +158,9 @@ export class BlogDetailsComponent implements OnInit {
 
   selectBlogsEvent(item) {
     let filter = this.blogsForCount.filter((a) => a.title === item.name);
-    this.router.navigate(['/blog-details?id=' + filter[0].id]);
-    window.location.href = '/blog-details?id=' + filter[0].id;
-
-    // do something with selected item
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('/blog-details?id=' + filter[0].id);
+    });
   }
 
 

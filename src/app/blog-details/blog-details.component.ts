@@ -95,7 +95,7 @@ export class BlogDetailsComponent implements OnInit {
 
   getComments() {
     this.comments=[];
-    this.db.collection("comments").get().then((querySnapshot) => {
+    this.db.collection("comments").where("status", "==", "up").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         this.comments.push(doc.data());
       });
@@ -112,21 +112,35 @@ export class BlogDetailsComponent implements OnInit {
 
   comment() {
     if (this.name === '' || this.email === '' || this.usercomment === '') {
-      this.toastr.error('', 'Please enter mandatory field');
+      this.toastr.info('', 'Veuillez saisir les champs obligatoire');
     } else {
-      let params = {
-        id: this.comments.length + 1,
-        name: this.name,
-        email: this.email,
-        comment: this.usercomment,
-      };
-      this.commonService.createComment(params).subscribe((res) => {
-        this.toastr.success('', 'Comment successfully!');
-        this.name = '';
-        this.email = '';
-        this.usercomment = '';
-        this.getComments();
-      });
+      if (!this.validateEmail(this.email)) {
+        this.toastr.error('', 'Veuillez saisir un email valide !!');
+      } else {
+        var date = this.buildDate();
+        var _id = this.comments.length + 1;
+        this.db.collection("comments").doc('comment-' + _id).set({
+          article: parseInt(this.id),
+          id: _id,
+          name: this.name,
+          email: this.email,
+          date: date,
+          comment: this.usercomment,
+          status: "en attente de validation"
+        })
+          .then(() => {
+            console.log("Document successfully written!");
+            this.toastr.success('Merci pour votre commentaire !! Il est en approbation');
+            this.name = '';
+            this.email = '';
+            this.usercomment = '';
+            this.getComments();
+            console.log(this.comments)
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+          });
+      }
     }
   }
 
@@ -144,7 +158,7 @@ export class BlogDetailsComponent implements OnInit {
     var count= 0;
     this.postComments= [];
     this.comments.forEach((post) => {
-      if(post.id == postId){
+      if(post.article == postId){
         this.postComments.push(post);
         count++;
       }
@@ -172,6 +186,26 @@ export class BlogDetailsComponent implements OnInit {
 
   onFocused(e) {
     // do something
+  }
+
+   validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  pad2(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+
+  buildDate(){
+    var date = new Date();
+    var month = this.pad2(date.getMonth()+1);
+    var day = this.pad2(date.getDate());
+    var year= date.getFullYear();
+    var hour = this.pad2(date.getHours());
+    var min = this.pad2(date.getMinutes());
+
+    return  day+"-"+month+"-"+year +" " + hour+":" + min;
   }
 
 }

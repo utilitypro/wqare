@@ -15,6 +15,8 @@ import {
 import { Location } from '@angular/common';
 import { CommonServiceService } from './common-service.service';
 import firebase from 'firebase/app';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 
 @Component({
@@ -93,6 +95,8 @@ export class AppComponent implements OnInit {
       measurementId: 'G-JBMW224EC9'
     };
     firebase.initializeApp(config);
+    registerLocaleData(localeFr, 'fr');
+
   }
 
   ngOnInit() {

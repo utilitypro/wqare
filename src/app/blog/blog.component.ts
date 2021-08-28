@@ -145,12 +145,12 @@ export class BlogComponent implements OnInit {
       this.toastr.info("Veuillez saisir votre recherche !!")
     }else {
       this.blogsForCount.forEach((a) => {
-        if (a.title.includes(text.query)) {
-          search.push(a);
+        if (this.buildStringForSearch(a.title).includes(this.buildStringForSearch(text.query))) {
+            search.push(a);
         }
       });
       if (search.length == 0) {
-        this.toastr.info("Pas de resultat pour votre recherche !!")
+        this.toastr.info("Aucun resultats !!")
       } else {
         this.blogs = [];
         this.blogs = search;
@@ -173,5 +173,11 @@ export class BlogComponent implements OnInit {
 
   setTrue() {
     return true;
+  }
+
+  buildStringForSearch(text){
+    return String(text).normalize('NFD')
+                      .replace(/[\u0300-\u036f]/g, '')
+                      .toLowerCase();
   }
 }

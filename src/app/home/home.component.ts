@@ -16,6 +16,7 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import 'firebase/firestore';
 import {getTime} from 'ngx-bootstrap/chronos/utils/date-getters';
+import {ToastrService} from 'ngx-toastr';
 
 export interface Doctors {
   id: number;
@@ -43,13 +44,15 @@ export class HomeComponent implements OnInit {
   blogs: any = [];
   keyword = 'name';
   searchDoctor = [];
+  searchResult = [];
   public countries = [];
   advantages: any = [];
   public db = firebase.firestore();
 
   constructor(
     public router: Router,
-    public commonService: CommonServiceService
+    public commonService: CommonServiceService,
+    private toastr: ToastrService
   ) {
     this.filteredEmployee = this.employeeCtrl.valueChanges.pipe(
       startWith(''),
@@ -258,15 +261,21 @@ export class HomeComponent implements OnInit {
         },
       ],
     };
-    this.searchDoctor = []
+    this.searchDoctor = [];
+    var unique = [];
     this.db.collection("doctors").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        // @ts-ignore
-        this.searchDoctor.push({
+        var pts = {
+          collection: "doctors",
           id: doc.data().id,
           name: doc.data().doctor_name,
-        });
-        this.doctors.push(doc.data())
+          pts : doc
+        }
+        if(!unique.includes(pts.name)) {
+          this.searchDoctor.push(pts);
+          unique.push(pts.name);
+        }
+        this.doctors.push(doc.data());
       });
     }).catch((error)=>{
       console.log(error);
@@ -274,11 +283,16 @@ export class HomeComponent implements OnInit {
 
     this.db.collection("specialities").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        // @ts-ignore
-        this.searchDoctor.push({
+        var pts = {
+          collection: "specialities",
           id: doc.data().id,
           name: doc.data().speciality,
-        });
+          pts : doc
+        }
+        if(!unique.includes(pts.name)){
+          this.searchDoctor.push(pts);
+          unique.push(pts.name);
+        }
       });
     }).catch((error)=>{
       console.log(error);
@@ -286,14 +300,22 @@ export class HomeComponent implements OnInit {
 
     this.db.collection("structures").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        this.searchDoctor.push({
+        var pts = {
+          collection: "structures",
           id: doc.data().id,
           name: doc.data().structure,
-        });
+          pts : doc
+        }
+        if(!unique.includes(pts.name)) {
+          this.searchDoctor.push(pts);
+          unique.push(pts.name);
+        }
       });
     }).catch((error)=>{
       console.log(error);
     });
+
+    console.log(this.searchResult)
   }
 
   getCountries() {
@@ -375,5 +397,108 @@ export class HomeComponent implements OnInit {
 
   prevpage() {
     this.slickModal3.slickPrev();
+  }
+
+  searchDoc(textForsearch, whereQuery) {
+    var index = 0;
+    if (textForsearch == "") {
+      this.toastr.error("Veuillez préciser votre recherche !")
+    } else {
+      var search = [];
+      this.searchDoctor.forEach((doc) => {
+        if (doc.collection != "specialities"){
+
+          if(doc.collection == "doctors"){
+            var isSpecDoc = this.buildStringForSearch(doc.pts.data().speciality).toLowerCase()
+              .includes(this.buildStringForSearch(textForsearch).toLowerCase());
+
+            var isDoc = this.buildStringForSearch(doc.pts.data().doctor_name).toLowerCase()
+              .includes(this.buildStringForSearch(textForsearch).toLowerCase());
+
+            if(isSpecDoc || isDoc) {
+              var toPush = {
+                id: index,
+                name: doc.pts.data().doctor_name,
+                education: doc.pts.data().Education,
+                speciality: doc.pts.data().speciality,
+                speciality_profile: doc.pts.data().speciality_profile,
+                location: doc.pts.data().location,
+                price: doc.pts.data().Price,
+                images: doc.pts.data().images,
+                services: doc.pts.data().services,
+                profile : doc.pts.data().profile,
+                collection: doc.collection,
+                data : doc.pts.data()
+              };
+              if (whereQuery != "") {
+                if (this.buildStringForSearch(doc.pts.data().addresse).toLowerCase()
+                  .includes(this.buildStringForSearch(whereQuery).toLowerCase())) {
+                  search.push(toPush);
+                  index++
+                }
+              }else {
+                  search.push(toPush);
+                index++
+              }
+              }
+            }else{
+            var isStruct = this.buildStringForSearch(doc.name).toLowerCase()
+              .includes(this.buildStringForSearch(textForsearch).toLowerCase());
+
+            var i = 0;
+            if(typeof(doc.pts.data().services) != "undefined" || doc.pts.data().services != null ) {
+              var services = doc.pts.data().services;
+              services.forEach((service) => {
+                if (this.buildStringForSearch(service).toLowerCase()
+                  .includes(this.buildStringForSearch(textForsearch).toLowerCase())) {
+                  i++;
+                }
+              });
+            }
+            var isSpec = i>0;
+
+            if(isSpec || isStruct){
+              var _toPush = {
+                id: index,
+                name: doc.pts.data().structure,
+                education: doc.pts.data().category,
+                speciality: doc.pts.data().category,
+                speciality_profile: "",
+                location: doc.pts.data().addresse,
+                price: "Selon le service",
+                images: doc.pts.data().images,
+                profile: doc.pts.data().profile,
+                services: doc.pts.data().services,
+                collection: doc.collection,
+                data : doc.pts.data()
+              };
+              if (whereQuery != "") {
+                if (this.buildStringForSearch(doc.pts.data().addresse).toLowerCase()
+                  .includes(this.buildStringForSearch(whereQuery).toLowerCase())) {
+                  search.push(_toPush);
+                  index++
+                }
+              }else {
+                  search.push(_toPush);
+                index++
+              }
+              }
+          }
+        }
+      });
+      if(search.length == 0){
+        localStorage.setItem("searchResult", JSON.stringify([]))
+        this.toastr.info("aucun resulat")
+      }else{
+        localStorage.setItem('searchResult', JSON.stringify(search));
+        this.router.navigateByUrl('/patients/search-doctor');
+      }
+    }
+  }
+
+  buildStringForSearch(text){
+    return String(text).normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
   }
 }

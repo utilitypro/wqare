@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./search-doctor.component.css']
 })
 export class SearchDoctorComponent implements OnInit {
-  doctors: any = [];
+  data: any = [];
   specialityList: any = [];
   type;
   specialist = "";
@@ -33,14 +33,12 @@ export class SearchDoctorComponent implements OnInit {
     },
   ];
   ngOnInit(): void {
-    this.getDoctors();
+    this.getData();
     this.getspeciality();
   }
 
-  getDoctors() {
-    this.commonService.getDoctors().subscribe(res => {
-      this.doctors = res;
-    })
+  getData() {
+    this.data = JSON.parse(localStorage.getItem("searchResult"));
   }
 
   getspeciality() {
@@ -59,9 +57,9 @@ export class SearchDoctorComponent implements OnInit {
 
   search() {
     if (this.type && this.speciality) {
-      this.doctors = this.doctors.filter(a => a.type === this.type && a.speciality === this.speciality)
+      this.data = this.data.filter(a => a.type === this.type && a.speciality === this.speciality)
     } else {
-      this.getDoctors();
+      this.getData();
     }
 
   }

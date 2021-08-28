@@ -13,7 +13,7 @@
                     <form>
                         <div class="form-group search-location">
 
-                          <ng-autocomplete [data]="countries" type="text" class="form-control"
+                          <ng-autocomplete [data]="countries" type="text" class="form-control" #where
                                            [searchKeyword]="keyword" placeHolder="OU ?" (selected)='selectContryEvent($event)'
                                            (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
                                            historyIdentifier="countries" [itemTemplate]="itemTemplate"
@@ -22,8 +22,8 @@
 
                         </div>
                         <div class="form-group search-info">
-                            <ng-autocomplete [data]="searchDoctor" type="text" class="form-control"
-                                [searchKeyword]="keyword" placeHolder="Médecin, établissement, spécialité …" (selected)='selectDoctorEvent($event)'
+                            <ng-autocomplete [data]="searchDoctor" type="text" class="form-control" #text
+                                [searchKeyword]="keyword" placeHolder="Médecin, établissement, spécialité" (selected)='selectDoctorEvent($event)'
                                 (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
                                 historyIdentifier="doctors" [itemTemplate]="itemTemplate"
                                 [notFoundTemplate]="notFoundTemplate">
@@ -37,9 +37,8 @@
                                 <div [innerHTML]="notFound"></div>
                             </ng-template>
                         </div>
-                        <button type="submit" class="btn btn-primary search-btn"
-                            [routerLink]="'/patients/search-doctor'"><i class="fas fa-search"></i>
-                            <span>Recherche</span></button>
+                        <a [style]="'color: white'" (click)="searchDoc(text.query, where.query)" class="btn btn-primary search-btn"><i class="fas fa-search"></i>
+                            <span>Recherche</span></a>
                     </form>
                 </div>
                 <!-- /Search -->

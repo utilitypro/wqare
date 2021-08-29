@@ -357,9 +357,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  selectDoctorEvent(item) {
-    let filter = this.searchDoctor.filter((a) => a.name === item.name);
-    this.router.navigateByUrl('/patients/doctor-profile?id=' + filter[0].id);
+  selectDoctorEvent(item, where) {
+    localStorage.setItem("searchDetails", JSON.stringify({}))
+    let filter = this.searchDoctor.filter((a) => (a.name === item.name && a.collection != 'doctors'));
+    if(filter.length > 0){
+      this.searchDoc(item.name, where);
+    }else {
+      let filter = this.searchDoctor.filter((a) => (a.name === item.name && a.collection == 'doctors'));
+      localStorage.setItem("searchDetails", JSON.stringify(filter[0].pts.data()));
+      this.router.navigateByUrl('/patients/doctor-profile?id=' + filter[0].id);
+    }
+
     // do something with selected item
   }
 

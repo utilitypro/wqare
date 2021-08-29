@@ -11,8 +11,15 @@ import { ToastrService } from 'ngx-toastr';
 export class DoctorProfileComponent implements OnInit {
 	id;
 	doctorDetails;
+  specialities;
+  formations: any [];
+  xps: any [];
+  awards: any [];
+  expertises: any [];
+  accessInfos: any [];
+
   constructor(public commonService:CommonServiceService,private route: ActivatedRoute,private toastr: ToastrService) {
-    	
+
   }
   images = [
 		{
@@ -35,10 +42,12 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   getDoctorsDetails() {
-  	this.commonService.getDoctorDetails(this.id)
-  		.subscribe(res=>{
-  			this.doctorDetails = res;
-  		})
+    this.doctorDetails = JSON.parse(localStorage.getItem('searchDetails'));
+    this.formations = JSON.parse(this.doctorDetails.formations);
+    this.xps = JSON.parse(this.doctorDetails.xps);
+    this.awards = JSON.parse(this.doctorDetails.awards);
+    this.expertises = this.doctorDetails.expertises;
+    this.accessInfos = JSON.parse(this.doctorDetails.accessInfos);
   }
 
   addFav() {
@@ -49,6 +58,7 @@ export class DoctorProfileComponent implements OnInit {
         document.getElementById("fav-btn").style.color = "#fff";
       })
   }
+
 
 
 }

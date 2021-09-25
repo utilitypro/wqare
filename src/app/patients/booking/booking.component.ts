@@ -10,6 +10,7 @@ import * as moment from 'moment';
 })
 export class BookingComponent implements OnInit {
   doctorId;
+  startNextEvent;
   action;
   doctorDetails;
   userDetails;
@@ -18,6 +19,8 @@ export class BookingComponent implements OnInit {
   endWeek: any = "";
   availability : any = [];
   public daterange: any = {};
+  dispo: boolean;
+
 
   // see original project for full list of options
   // can also be setup using the config service to apply to multiple pickers
@@ -58,19 +61,29 @@ export class BookingComponent implements OnInit {
       if(this.action == 'next'){
         start = moment(localStorage.getItem('endWeek'), 'YYYY-MM-DD').add(1, 'days');
         end = moment(localStorage.getItem('endWeek'), 'YYYY-MM-DD').add(7, 'days')
+        this.getWeek1(start, end);
+
       }
-      if(this.action == 'prev'){
+      else if(this.action == 'prev'){
         start = moment(localStorage.getItem('startWeek'), 'YYYY-MM-DD').add(-7, 'days');
         end = moment(localStorage.getItem('startWeek'), 'YYYY-MM-DD').add(-1, 'days');
+        this.getWeek1(start, end);
+
+      }else{
+        var _date = moment(this.action, 'YYYY-MM-DD');
+        start = moment().day("Monday").week(_date.week());
+        end =  moment().day("Monday").week(_date.week()).add(6, 'days');
+        this.getWeek2(start, end);
       }
+
       this.getDoctorsDetails(this.doctorId);
       this.patientDetails();
-      this.getWeek(start, end);
       this.getAvailability(this.doctorDetails.schID, this.doctorDetails.step, start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'), this.doctorDetails.resource);
 
     }
     localStorage.setItem('startWeek', this.startWeek.format('YYYY-MM-DD'));
     localStorage.setItem('endWeek', this.endWeek.format('YYYY-MM-DD'));
+    this.getNextDispo(this.doctorDetails.schID, this.doctorDetails.step, this.doctorDetails.resource);
   }
 
   getDoctorsDetails(doctorId) {
@@ -94,15 +107,29 @@ export class BookingComponent implements OnInit {
       var day = startWeek.add(1, 'days').toDate();
       this.week.push({'day': day.getUTCDate(), 'month' : months[day.getUTCMonth()], 'year' : day.getFullYear()});
     }
-    console.log(this.week);
   }
 
-  getWeek(start, end){
+  getWeek1(start, end){
+    this.week=[];
     let startWeek = moment(start, 'YYYY-MM-DD');
     this.startWeek = moment(start, 'YYYY-MM-DD');
     this.endWeek = moment(end, 'YYYY-MM-DD');
     var  months = ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"];
     for (let i = 0; i < 7; i++) {
+      var day = startWeek.add(1, 'days').toDate();
+      console.log(day);
+      this.week.push({'day': day.getUTCDate(), 'month' : months[day.getUTCMonth()], 'year' : day.getFullYear()});
+    }
+  }
+
+  getWeek2(start, end){
+    this.week=[];
+    let startWeek = moment(start, 'YYYY-MM-DD');
+    this.startWeek = moment(start, 'YYYY-MM-DD');
+    this.endWeek = moment(end, 'YYYY-MM-DD');
+    var  months = ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"];
+    this.week.push({'day': startWeek.toDate().getUTCDate(), 'month' : months[startWeek.toDate().getUTCMonth()], 'year' : startWeek.toDate().getFullYear()});
+    for (let i = 1; i < 7; i++) {
       var day = startWeek.add(1, 'days').toDate();
       console.log(day);
       this.week.push({'day': day.getUTCDate(), 'month' : months[day.getUTCMonth()], 'year' : day.getFullYear()});
@@ -113,7 +140,15 @@ export class BookingComponent implements OnInit {
   getAvailability(schID, step, start, end, resource){
     return this.commonService.getDocAvailability(schID, resource, start, end, step ).subscribe((res) => {
       this.availability = res;
+      this.dispo = res['Lun'].length + res['Mar'].length + res['Mer'].length + res['Jeu'].length + res['Ven'].length + res['Sam'].length + res['Dim'].length == 0;
+      console.log(this.dispo);
       console.log(res);
+    });
+  }
+
+  getNextDispo(schID, step, resource){
+    return this.commonService.getDocUpcomingDispo(schID, step, resource).subscribe((res) => {
+      this.startNextEvent = res['start'].split('T')[0];
     });
   }
 
@@ -124,6 +159,12 @@ export class BookingComponent implements OnInit {
   search(direct) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigateByUrl('/patients/booking?id=' + this.doctorId+'&action='+direct);
+    });
+  }
+
+  searchDispo(dispo) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('/patients/booking?id=' + this.doctorId+'&action='+dispo);
     });
   }
 }

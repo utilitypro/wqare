@@ -158,6 +158,14 @@ export class CommonServiceService {
     return this.http.get(url)
   }
 
+  getDocUpcomingDispo(shID, step, resource){
+    //"594131/step/60/resource/consultation"
+    var url = 'https://tsoumbou.pythonanywhere.com/api/calendar/nextAvailable/scheduleID/'+shID;
+    url=url+'/step/'+step+'/resource/'+resource
+    console.log(url)
+    return this.http.get(url)
+  }
+
   createAppointment(params) {
     return this.http.post(`${this.SERVER_URL + 'appointments'}`, params)
   }

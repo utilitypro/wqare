@@ -69,7 +69,7 @@
                 <div class="day-slot">
                   <ul>
                     <li class="left-arrow">
-                      <a (click)="search('prev')" >
+                      <a (click)="search('prev')" [style]="'cursor: pointer'">
                         <i class="fa fa-chevron-left"></i>
                       </a>
                     </li>
@@ -102,7 +102,7 @@
                       <span class="slot-date">{{this.week[6].day}} {{this.week[6].month}} <small class="slot-year">{{this.week[6].year}}</small></span>
                     </li>
                     <li class="right-arrow">
-                      <a (click)="search('next')">
+                      <a (click)="search('next')" [style]="'cursor: pointer'">
                         <i class="fa fa-chevron-right"></i>
                       </a>
                     </li>
@@ -124,7 +124,7 @@
                 <div class="time-slot">
                   <ul class="clearfix">
                     <li>
-                      <a  class="timing" *ngFor="let lun of availability.Lun">
+                      <a  class="timing" *ngFor="let lun of availability.Lun" [routerLink]="'/patients/checkout'" [queryParams]="{id: doctorDetails?.id, date: lun.start.split('T')[0], time:lun.start.split('T')[1]}">
                         <span (click)="book(lun)">{{lun.start.split('T')[1]}}</span>
                       </a>
                       <a>
@@ -133,7 +133,7 @@
                     </li>
 
                     <li *ngIf="availability.Mar">
-                      <a class="timing" *ngFor="let mar of availability.Mar">
+                      <a class="timing" *ngFor="let mar of availability.Mar" [routerLink]="'/patients/checkout'" [queryParams]="{id: doctorDetails?.id, date: mar.start.split('T')[0], time:mar.start.split('T')[1]}">
                         <span (click)="book(mar)">{{mar.start.split('T')[1]}}</span>
                       </a>
                       <a>
@@ -142,7 +142,7 @@
                     </li>
 
                     <li>
-                      <a class="timing" *ngFor="let mer of availability.Mer">
+                      <a class="timing" *ngFor="let mer of availability.Mer" [routerLink]="'/patients/checkout'" [queryParams]="{id: doctorDetails?.id, date: mer.start.split('T')[0], time:mer.start.split('T')[1]}">
                         <span (click)="book(mer)">{{mer.start.split('T')[1]}}</span>
                       </a>
                       <a>
@@ -151,7 +151,7 @@
                     </li>
 
                     <li>
-                      <a class="timing" *ngFor="let jeu of availability.Jeu">
+                      <a class="timing" *ngFor="let jeu of availability.Jeu" [routerLink]="'/patients/checkout'" [queryParams]="{id: doctorDetails?.id, date: jeu.start.split('T')[0], time:jeu.start.split('T')[1]}">
                         <span (click)="book(jeu)">{{jeu.start.split('T')[1]}}</span>
                       </a>
                       <a>
@@ -160,7 +160,7 @@
                     </li>
 
                     <li>
-                      <a class="timing" *ngFor="let ven of availability.Ven">
+                      <a class="timing" *ngFor="let ven of availability.Ven" [routerLink]="'/patients/checkout'" [queryParams]="{id: doctorDetails?.id, date: ven.start.split('T')[0], time:ven.start.split('T')[1]}">
                         <span (click)="book(ven)">{{ven.start.split('T')[1]}}</span>
                       </a>
                       <a>
@@ -169,7 +169,7 @@
                     </li>
 
                     <li>
-                      <a class="timing" *ngFor="let sam of availability.Sam">
+                      <a class="timing" *ngFor="let sam of availability.Sam" [routerLink]="'/patients/checkout'" [queryParams]="{id: doctorDetails?.id, date: sam.start.split('T')[0], time:sam.start.split('T')[1]}">
                         <span (click)="book(sam)">{{sam.start.split('T')[1]}}</span>
                       </a>
                       <a>
@@ -178,7 +178,7 @@
                     </li>
 
                     <li>
-                      <a class="timing" *ngFor="let dim of availability.Dim">
+                      <a class="timing" *ngFor="let dim of availability.Dim" [routerLink]="'/patients/checkout'" [queryParams]="{id: doctorDetails?.id, date: dim.start.split('T')[0], time:dim.start.split('T')[1]}">
                         <span (click)="book(dim)">{{dim.start.split('T')[1]}}</span>
                       </a>
                       <a>
@@ -187,6 +187,9 @@
                     </li>
 
                   </ul>
+                  <a *ngIf="dispo" [style]="'cursor: pointer'" (click)="searchDispo(startNextEvent)">
+                    <span ><h6 [style]="'margin-left : 250px; color: #007bff;'">Pas de disponibilité cette semaine  |  <i class="fa fa-eye" aria-hidden="true"></i>  Prochain RDV le {{startNextEvent}}</h6></span>
+                  </a>
                 </div>
                 <!-- /Time Slot -->
 

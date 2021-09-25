@@ -18,21 +18,22 @@ export class CheckoutComponent implements OnInit {
   phone;
   appointments:any = [];
   patients : any = [];
+  date: any;
+  time: any;
 
   constructor(private router:Router,private route: ActivatedRoute,public commonService:CommonServiceService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
   	this.doctorId = this.route.snapshot.queryParams["id"];
-  	this.getDoctorsDetails();
+  	this.date = this.route.snapshot.queryParams["date"];
+    this.time = this.route.snapshot.queryParams["time"];
+  	this.getDoctorsDetails(this.doctorId);
   	this.allPatients();
     this.getAppointments();
   }
 
-  getDoctorsDetails() {
-  	this.commonService.getDoctorDetails(this.doctorId)
-  		.subscribe(res=>{
-  			this.doctorDetails = res;
-  		})
+  getDoctorsDetails(doctorId) {
+    this.doctorDetails = JSON.parse(localStorage.getItem("docs"))[parseInt(doctorId)]
   }
 
   allPatients() {
@@ -60,7 +61,7 @@ export class CheckoutComponent implements OnInit {
    booking() {
     let value = this.patients.reverse();
     let key = value[0]['key'] + '1'
-    let params = {  
+    let params = {
       id: this.appointments.length+1,
       doctorName : this.doctorDetails.doctor_name,
       type:"New patient",
@@ -69,7 +70,7 @@ export class CheckoutComponent implements OnInit {
       Patient_Name:this.firstName+this.lastName,
       appointment_time:new Date(),
       status : "active",
-      amount:this.doctorDetails.Price 
+      amount:this.doctorDetails.Price
     }
     this.commonService.createAppointment(params)
       .subscribe(res=>{

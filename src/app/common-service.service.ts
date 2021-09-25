@@ -150,6 +150,14 @@ export class CommonServiceService {
     return this.http.get(`${this.SERVER_URL + 'patients'}/${id}`)
   }
 
+  getDocAvailability(shID, resource, start, end, step){
+    var url = 'https://tsoumbou.pythonanywhere.com/api/calendar/available/';
+    //scheduleID/594131/step/60/ressource/consulatation/start/2021-09-20/end/2021-09-21/
+    url = url+'scheduleID/'+shID+'/step/'+step+'/ressource/'+resource+'/start/'+start+'/end/'+end+'/';
+    console.log(url)
+    return this.http.get(url)
+  }
+
   createAppointment(params) {
     return this.http.post(`${this.SERVER_URL + 'appointments'}`, params)
   }

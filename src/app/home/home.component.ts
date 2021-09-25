@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
     this.getblogs();
     this.getAdvantages();
 
-
     // User's voice slider
     $('.testi-slider').each(function () {
       var $show = $(this).data('show');
@@ -263,8 +262,10 @@ export class HomeComponent implements OnInit {
     };
     this.searchDoctor = [];
     var unique = [];
+    localStorage.setItem("docs", "{}");
     this.db.collection("doctors").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        var id = doc.data().id;
         var pts = {
           collection: "doctors",
           id: doc.data().id,
@@ -276,6 +277,9 @@ export class HomeComponent implements OnInit {
           unique.push(pts.name);
         }
         this.doctors.push(doc.data());
+        var localDoc = JSON.parse(localStorage.getItem("docs"));
+        localDoc[id] = doc.data();
+        localStorage.setItem("docs", String(JSON.stringify(localDoc)));
       });
     }).catch((error)=>{
       console.log(error);
@@ -425,7 +429,7 @@ export class HomeComponent implements OnInit {
 
             if(isSpecDoc || isDoc) {
               var toPush = {
-                id: index,
+                id: doc.pts.data().id,
                 name: doc.pts.data().doctor_name,
                 education: doc.pts.data().Education,
                 speciality: doc.pts.data().speciality,

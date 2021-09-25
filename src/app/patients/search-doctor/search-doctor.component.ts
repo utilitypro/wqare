@@ -85,6 +85,7 @@ export class SearchDoctorComponent implements OnInit {
   bookAppointment(id) {
     // if((localStorage.getItem('auth') === 'true') && (localStorage.getItem('patient') === 'true')) {
     this.router.navigateByUrl('/patients/booking?id=' + id);
+
     // } else {
     //   this.router.navigate(['/']);
     // }

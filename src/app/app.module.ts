@@ -7,7 +7,6 @@ import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -26,7 +25,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     HttpClientModule,
     SlickCarouselModule,
     ToastrModule.forRoot(),
-    HttpClientInMemoryWebApiModule.forRoot(DataService),
     BrowserAnimationsModule,
     FormsModule,
     NgbModule,

@@ -319,7 +319,6 @@ export class HomeComponent implements OnInit {
       console.log(error);
     });
 
-    console.log(this.searchResult)
   }
 
   getCountries() {
@@ -339,10 +338,15 @@ export class HomeComponent implements OnInit {
 
   getblogs() {
     this.blogs = []
+    localStorage.setItem("blogs", "{}");
     this.db.collection("blogs").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         // @ts-ignore
+        var id = doc.data().id;
         this.blogs.push(doc.data());
+        var bg = JSON.parse(localStorage.getItem("blogs"));
+        bg[id] = doc.data();
+        localStorage.setItem("blogs", JSON.stringify(bg));
       });
     }).catch((error)=>{
       console.log(error);

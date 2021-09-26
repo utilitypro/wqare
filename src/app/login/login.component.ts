@@ -58,14 +58,18 @@ export class LoginComponent implements OnInit {
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('patientLogin');
           //window.location.reload();
-          self.router.navigate(['/patients/dashboard']);
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            self.router.navigate(['/patients/dashboard']);
+          });
         }else{
           localStorage.setItem('auth', 'true');
           localStorage.setItem('id', user.email);
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('doctorLogin');
           //window.location.reload();
-          self.router.navigate(['/doctor/dashboard']);
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            self.router.navigate(['/doctor/dashboard']);
+          });
         }
 
         //console.log(token)
@@ -94,14 +98,18 @@ export class LoginComponent implements OnInit {
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('patientLogin');
         //window.location.reload();
-        self.router.navigate(['/patients/dashboard']);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          self.router.navigate(['/patients/dashboard']);
+        });
       }else{
         localStorage.setItem('auth', 'true');
         localStorage.setItem('id', user.email);
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('doctorLogin');
         // window.location.reload();
-        self.router.navigate(['/doctor/dashboard']);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          self.router.navigate(['/doctor/dashboard']);
+        });
       }
       //console.log(token)
       //console.log(user)

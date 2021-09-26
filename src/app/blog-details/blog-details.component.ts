@@ -59,9 +59,7 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   getBlogdetails() {
-    this.commonService.getBlogsDetails(this.id).subscribe((res) => {
-      this.blogdetails = res;
-    });
+    this.blogdetails = JSON.parse(localStorage.getItem("blogs"))[parseInt(this.id)]
   }
 
   getBlogs() {

@@ -91,4 +91,10 @@ export class SearchDoctorComponent implements OnInit {
     // }
   }
 
+  printDocProfile(id){
+    localStorage.setItem("searchDetails", JSON.stringify(JSON.parse(localStorage.getItem("docs"))[parseInt(id)]));
+    this.router.navigateByUrl('/patients/doctor-profile?id=' + id);
+
+  }
+
 }

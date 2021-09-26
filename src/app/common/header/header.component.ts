@@ -17,7 +17,7 @@ import { CommonServiceService } from './../../common-service.service';
 })
 export class HeaderComponent implements OnInit {
   auth: boolean = false;
-  isPatient: boolean = false;
+  isPraticien: boolean = true;
   page;
   constructor(
     @Inject(DOCUMENT) private document,
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
       }
       if (res === 'logout') {
         this.auth = false;
-        this.isPatient = false;
+        this.isPraticien = false;
       }
     });
   }
@@ -44,8 +44,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('auth') === 'true') {
       this.auth = true;
-      this.isPatient =
-        localStorage.getItem('patient') === 'true' ? true : false;
+      this.isPraticien = localStorage.getItem('praticien') === 'true' ? true : false;
     }
   }
 
@@ -77,7 +76,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.auth = false;
-    this.isPatient = false;
+    this.isPraticien = false;
     this.router.navigate(['/login']);
   }
 

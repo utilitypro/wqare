@@ -124,8 +124,10 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('praticien', this.isPraticien.toString());
             //localStorage.setItem('id', filter[0]['id']);
             this.toastr.success('', 'Login success!');
-            //this.commonService.nextmessage('patientLogin');
-            this.router.navigate(['/patients/dashboard']);
+            this.commonService.nextmessage('patientLogin');
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/patients/dashboard']);
+            });
           }else {
             this.toastr.error('Please validate your email adress!', 'Login failed!');
           }
@@ -142,7 +144,10 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('praticien', this.isPraticien.toString());
           this.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('doctorLogin');
-          this.router.navigate(['/doctor/dashboard']);
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/doctor/dashboard']);
+          });
+
         },
         () => {
           this.toastr.error('', 'Login failed!');

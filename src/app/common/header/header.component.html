@@ -15,15 +15,15 @@
             </div>
             <div class="main-menu-wrapper">
                 <div class="menu-header">
-                    <a [routerLink]="'/'" class="menu-logo">
-                        <img src="assets/img/logo.PNG" class="img-fluid" alt="Logo">
+                    <a [routerLink]="'/'" class="menu-logo" >
+                        <img src="assets/img/logo.PNG" class="img-fluid" alt="Logo" style="cursor: pointer;">
                     </a>
                     <a id="menu_close" class="menu-close" href="javascript:void(0);">
                         <i class="fas fa-times"></i>
                     </a>
                 </div>
                 <ul class="main-nav">
-                    <li [class.active]="page === 'Home'">
+                    <!--<li [class.active]="page === 'Home'">
                         <a (click)="navigate('Home')" [routerLink]="'/'" >Accueil</a>
                     </li>
                     <li  [class.active]="page === 'doctor'" class="has-submenu"  style="cursor: pointer;" >
@@ -33,34 +33,31 @@
                             <li><a [routerLink]="'doctor/appointment'">Mes Rendez-Vous</a></li>
                             <li><a [routerLink]="'doctor/scheduletiming'">Planifier son calendrier</a></li>
                             <li><a [routerLink]="'doctor/patients'">Mes Patients</a></li>
-                            <!--<li><a [routerLink]="'patients/patient-profile'">Infos Patients</a></li>-->
                             <li><a [routerLink]="'doctor/message'">Chat</a></li>
                             <li><a [routerLink]="'doctor/invoice'">Factures</a></li>
                             <li><a [routerLink]="'doctor/settings'">Profile</a></li>
                             <li><a [routerLink]="'doctor/reviews'">Commentaires</a></li>
                         </ul>
-                    </li>
-                    <li  [class.active]="page === 'patients'" class="has-submenu" (click)="addStyle()" routerLinkActive="active">
-                        <a >Patients <i class="fas fa-chevron-down"></i></a>
-                        <ul class="submenu" id="submenu">
-                            <!--<li class="has-submenu">
-                                <a href="javascript:void(0);">Praticiens</a>
-                                <ul class="submenu">
-                                    <li><a (click)="mapGrid()">Map</a></li>
-                                </ul>
-                            </li>-->
+                    </li>-->
+                  <!--<li  [class.active]="page === 'patients'" class="has-submenu" (click)="addStyle()" routerLinkActive="active">
+                      <a >Patients <i class="fas fa-chevron-down"></i></a>
+                      <ul class="submenu" id="submenu">
+                          <li class="has-submenu">
+                              <a href="javascript:void(0);">Praticiens</a>
+                              <ul class="submenu">
+                                  <li><a (click)="mapGrid()">Map</a></li>
+                              </ul>
+                          </li>
 							<li><a [routerLink]="'patients/dashboard'" >Dashboard</a></li>
-                            <li><a (click)="navigate('patients')"  [routerLink]="'patients/search-doctor'">Chercher un Praticien</a></li>
-                            <!--<li><a [routerLink]="'patients/doctor-profile'">Doctor Profile</a></li>-->
+                            <li><a (click)="navigate('patients')"  [routerLink]="'patients/search-doctor'">Chercher un Praticien</a></li>-->
+                            <!--<li><a [routerLink]="'patients/doctor-profile'">Doctor Profile</a></li>
                             <li><a [routerLink]="'patients/booking'">Reservations</a></li>
-                            <!--<li><a [routerLink]="'patients/checkout'">Paiement</a></li>-->
-                            <!--<li><a [routerLink]="'patients/success'">Reservation reussi</a></li>-->
                             <li><a [routerLink]="'patients/favourites'">Favoris</a></li>
                             <li><a [routerLink]="'patients/message'">Chat</a></li>
                             <li><a [routerLink]="'patients/settings'">Profile</a></li>
                             <li><a [routerLink]="'change-password'">Modifier son mot de passe</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                    <!-- <li class="has-submenu">
                         <a href="javascript:void(0)">Pages <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
@@ -82,24 +79,24 @@
                             <li><a [routerLink]="'forgot-password'">Forgot Password</a></li>
                         </ul>
                     </li> -->
-                    <li class="has-submenu" [class.active]="page === 'Blog'">
-                        <a [routerLink]="'blog-grid'">Blog</a>
-                        <!--<ul class="submenu">-->
+                  <!--<li class="has-submenu" [class.active]="page === 'Blog'">
+                      <a [routerLink]="'blog-grid'">Blog</a>
+                      <ul class="submenu">-->
                             <!--<li><a [routerLink]="'blog'">Blog List</a></li>
-                            <li><a [routerLink]="'blog-grid'">Blog Grid</a></li> 
+                            <li><a [routerLink]="'blog-grid'">Blog Grid</a></li>
                             <li><a [routerLink]="'blog-details'">Blog Details</a></li>
-                        </ul>-->
+                        </ul>
                     </li>
                     <li >
                         <a (click)="navigate('Admin')" style="cursor: pointer;">Admin</a>
-                    </li>
+                    </li>-->
                     <li class="login-link">
                         <a [routerLink]="'login'">Se Connecter / S'inscrire</a>
                     </li>
                 </ul>
             </div>
             <ul class="nav header-navbar-rht">
-                <li class="nav-item contact-item">
+               <!-- <li class="nav-item contact-item">
                     <div class="header-contact-img">
                         <i class="far fa-hospital"></i>
                     </div>
@@ -107,10 +104,16 @@
                         <p class="contact-header">Contact</p>
                         <p class="contact-info-header"> +24162301921</p>
                     </div>
-                </li>
+                </li>-->
                 <li class="nav-item" *ngIf="!auth">
                     <a class="nav-link header-login"  [routerLink]="'login'">Se Connecter / S'inscrire</a>
                 </li>
+              <li class="nav-item" *ngIf="auth && !isPraticien">
+                <a class="nav-link header-login"  [routerLink]="'patients/dashboard'">Mon Compte</a>
+              </li>
+              <li class="nav-item" *ngIf="auth && isPraticien">
+                <a class="nav-link header-login"  [routerLink]="'doctor/dashboard'">Mon Compte</a>
+              </li>
                 <!-- User Menu
                 <li class="nav-item dropdown has-arrow logged-item" *ngIf="auth">
                     <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -137,7 +140,7 @@
                     </div>
                 </li>
                     /User Menu -->
-                        
+
             </ul>
 
 

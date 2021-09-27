@@ -131,15 +131,19 @@ export class CheckoutComponent implements OnInit {
           //localStorage.setItem('id', filter[0]['id']);
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('patientLogin');
-          //window.location.reload();
-          self.router.navigate(['/patients/dashboard']);
+          location.reload();
+          /*self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            self.router.navigate(['/patients/checkout?id='+self.doctorId+'&date='+self.date +'&time='+self.time]);
+          });*/
         } else {
           localStorage.setItem('auth', 'true');
           localStorage.setItem('id', user.email);
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('doctorLogin');
-          //window.location.reload();
-          self.router.navigate(['/doctor/dashboard']);
+          location.reload();
+          /*self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            self.router.navigate(['/patients/checkout?id='+self.doctorId+'&date='+self.date +'&time='+self.time]);
+          });*/
         }
 
         //console.log(token)
@@ -168,14 +172,20 @@ export class CheckoutComponent implements OnInit {
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('patientLogin');
         //window.location.reload();
-        self.router.navigate(['/patients/dashboard']);
+        location.reload();
+        /*self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          self.router.navigate(['/patients/checkout?id='+self.doctorId+'&date='+self.date +'&time='+self.time]);
+        });*/
       } else {
         localStorage.setItem('auth', 'true');
         localStorage.setItem('id', user.email);
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('doctorLogin');
         // window.location.reload();
-        self.router.navigate(['/doctor/dashboard']);
+        location.reload();
+        /*self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          self.router.navigate(['/patients/checkout?id='+self.doctorId+'&date='+self.date +'&time='+self.time]);
+        });*/
       }
       //console.log(token)
       //console.log(user)
@@ -199,7 +209,10 @@ export class CheckoutComponent implements OnInit {
             //localStorage.setItem('id', filter[0]['id']);
             this.toastr.success('', 'Login success!');
             //this.commonService.nextmessage('patientLogin');
-            this.router.navigate(['/patients/dashboard']);
+            location.reload();
+            /*this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/patients/checkout?id='+this.doctorId+'&date='+this.date +'&time='+this.time]);
+            });*/
           } else {
             this.toastr.error('Please validate your email adress!', 'Login failed!');
           }
@@ -215,8 +228,11 @@ export class CheckoutComponent implements OnInit {
           localStorage.setItem('id', name);
           localStorage.setItem('praticien', this.isPraticien.toString());
           this.toastr.success('', 'Login success!');
+          location.reload();
           //this.commonService.nextmessage('doctorLogin');
-          this.router.navigate(['/doctor/dashboard']);
+          //this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          //  location.reload();//this.router.navigate(['/patients/checkout?id='+this.doctorId+'&date='+this.date +'&time='+this.time]);
+         // });
         },
         () => {
           this.toastr.error('', 'Login failed!');
@@ -255,7 +271,7 @@ export class CheckoutComponent implements OnInit {
         localStorage.setItem(profil, this.isPraticien.toString());
         localStorage.setItem('id', name);
         this.toastr.success('', 'authentification reussi!');
-        this.router.navigate(['/patients/dashboard']);
+        this.router.navigate(['/patients/checkout?id='+this.doctorId+'&date='+this.date +'&time='+this.time]);
       },
       () => {
         this.toastr.error('', 'Echec authentification!');

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { CommonServiceService } from '../common-service.service';
 
+
 import { ToastrService } from 'ngx-toastr';
 import {AuthService} from '../authService.service';
 import firebase from 'firebase/app';
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('patientLogin');
           //window.location.reload();
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             self.router.navigate(['/patients/dashboard']);
           });
         }else{
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
           self.toastr.success('', 'Login success!');
           //this.commonService.nextmessage('doctorLogin');
           //window.location.reload();
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             self.router.navigate(['/doctor/dashboard']);
           });
         }
@@ -98,7 +99,7 @@ export class LoginComponent implements OnInit {
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('patientLogin');
         //window.location.reload();
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           self.router.navigate(['/patients/dashboard']);
         });
       }else{
@@ -107,7 +108,7 @@ export class LoginComponent implements OnInit {
         self.toastr.success('', 'Login success!');
         //this.commonService.nextmessage('doctorLogin');
         // window.location.reload();
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        self.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           self.router.navigate(['/doctor/dashboard']);
         });
       }

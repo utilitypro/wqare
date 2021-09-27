@@ -83,15 +83,15 @@
 										<h4 class="card-title">Commentaires ({{postComments.length}})</h4>
 									</div>
 									<div class="card-body pb-0">
-									<ul class="comments-list">
+									<ul>
 										<li *ngFor="let comment of postComments">
 											<div class="comment">
-												<div class="comment-author">
-													<img class="avatar" alt="" src="assets/img/patients/patient.jpg">
-												</div>
+												<!--<div class="comment-author">
+													<img class="avatar" alt="" src="assets/img/patients/patient.png">
+												</div>-->
 												<div class="comment-block">
 													<span class="comment-by">
-														<span class="blog-author-name">{{comment.name}}</span>
+														<span class="blog-author-name"><i class="far fa-comment"></i> {{comment.name}}</span>
 													</span>
 													<p>{{comment.comment}}</p>
 													<p class="blog-date">{{comment.date}}</p>

@@ -198,7 +198,7 @@
 								<div class="card-body">
 									<ul class="categories">
                     <li *ngFor="let theme of themes | slice:0:10">
-                    <a (click)="nav(theme.name)">{{theme.name}} ({{countTheme(theme.name) }})</a>
+                    <a (click)="nav(theme.name)" [style]="'cursor: pointer;'">{{theme.name}} ({{countTheme(theme.name) }})</a>
                     </li>
 									</ul>
 								</div>

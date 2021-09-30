@@ -93,7 +93,7 @@
 										</a>
 									</div>-->
 									<div class="clinic-booking">
-										<a class="apt-btn" [routerLink]="'/patients/booking'"  [queryParams]="{id: doctorDetails?.id}">Reserver</a>
+										<a class="apt-btn" (click)="book(doctorDetails.id)">Reserver</a>
 									</div>
 								</div>
 							</div>

@@ -9,49 +9,6 @@ import { map } from "rxjs/operators";
 })
 export class CommonServiceService {
   public patients: any = [
-    {
-      "patientName": "Richard Wilson",
-      "patient_id": "P0016",
-      "apptDate": "Sat May 23 2020 13:35:47 GMT+0530 (India Standard Time)",
-      "purpose": "General",
-      "type": "New patient",
-      "email": "richard@example.com",
-      "phone": "+1 923 782 4575",
-      "amount": 150,
-      "status": 0
-    },
-    {
-      "patientName": "Richard Wilson",
-      "patient_id": "P0001",
-      "email": "richard@example.com",
-      "apptDate": "Sat May 23 2020 13:35:47 GMT+0530 (India Standard Time)",
-      "purpose": "General",
-      "type": "Old patient",
-      "phone": "+1 828 632 9170",
-      "amount": 200,
-      "status": 0
-    },
-    {
-      "patientName": "Richard Wilson",
-      "patient_id": "P0002",
-      "email": "richard@example.com",
-      "apptDate": "Sat May 23 2020 13:35:47 GMT+0530 (India Standard Time)",
-      "purpose": "General",
-      "type": "New patient",
-      "phone": "+1 828 632 9170",
-      "amount": 350,
-      "status": 0
-    },
-    {
-      "patientName": "Richard Wilson",
-      "email": "richard@example.com",
-      "patient_id": "P0003",
-      "apptDate": "Sat May 23 2020 13:35:47 GMT+0530 (India Standard Time)",
-      "purpose": "General",
-      "type": "New patient",
-      "amount": 400,
-      "status": 0
-    }
   ]
 
   messages: "";
@@ -159,15 +116,15 @@ export class CommonServiceService {
   }
 
   getDocUpcomingDispo(shID, step, resource){
-    //"594131/step/60/resource/consultation"
     var url = 'https://tsoumbou.pythonanywhere.com/api/calendar/nextAvailable/scheduleID/'+shID;
     url=url+'/step/'+step+'/resource/'+resource
-    console.log(url)
     return this.http.get(url)
   }
 
-  createAppointment(params) {
-    return this.http.post(`${this.SERVER_URL + 'appointments'}`, params)
+  createAppointment(shID, step, resource,start, end, email, mobile, adress) {
+  var url = 'https://tsoumbou.pythonanywhere.com/api/calendar/booking/scheduleID/'+shID;
+  url=url+'/step/'+step+'/resource/'+resource+'/start/'+start+'/end/'+end+'/'+'/email/'+email+'/mobile/'+mobile+'/'+'/address/'+adress+'/';
+  return this.http.get(url)
   }
 
   getFav() {

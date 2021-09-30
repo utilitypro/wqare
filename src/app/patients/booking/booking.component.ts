@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonServiceService } from './../../common-service.service';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
@@ -47,11 +48,10 @@ export class BookingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.doctorId = this.route.snapshot.queryParams['id'];
+    //this.doctorId = this.route.snapshot.queryParams['id'];
     this.action = this.route.snapshot.queryParams['action'];
-    console.log(this.action);
     if(!this.action){
-      this.getDoctorsDetails(this.doctorId);
+      this.getDoctorsDetails();
       this.patientDetails();
       this.getCurrentWeek();
       this.getAvailability(this.doctorDetails.schID, this.doctorDetails.step, this.startWeek.format('YYYY-MM-DD'), this.endWeek.format('YYYY-MM-DD'), this.doctorDetails.resource);
@@ -76,7 +76,7 @@ export class BookingComponent implements OnInit {
         this.getWeek2(start, end);
       }
 
-      this.getDoctorsDetails(this.doctorId);
+      this.getDoctorsDetails();
       this.patientDetails();
       this.getAvailability(this.doctorDetails.schID, this.doctorDetails.step, start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'), this.doctorDetails.resource);
 
@@ -86,8 +86,28 @@ export class BookingComponent implements OnInit {
     this.getNextDispo(this.doctorDetails.schID, this.doctorDetails.step, this.doctorDetails.resource);
   }
 
-  getDoctorsDetails(doctorId) {
-    this.doctorDetails = JSON.parse(localStorage.getItem("docs"))[parseInt(doctorId)]
+  getDoctorsDetails() {
+    this.commonService.message.subscribe((res) => {
+      if(res != undefined){
+      // @ts-ignore
+      var _res= JSON.parse(res);
+      if (_res['page'] == 'booking') {
+        // @ts-ignore
+        var data = _res;
+        if (data) {
+          console.log(data);
+          this.doctorDetails = data;
+          // @ts-ignore
+          localStorage.setItem('bookdata', res);
+        }
+      }else if(localStorage.getItem("bookdata")){
+        this.doctorDetails = JSON.parse(localStorage.getItem("bookdata"));
+      }
+      }else if (res == undefined && localStorage.getItem("bookdata")) {
+          this.doctorDetails = JSON.parse(localStorage.getItem("bookdata"));
+        }
+    });
+    //this.doctorDetails = JSON.parse(localStorage.getItem("docs"))[parseInt(doctorId)]
   }
 
   patientDetails() {
@@ -134,7 +154,6 @@ export class BookingComponent implements OnInit {
       console.log(day);
       this.week.push({'day': day.getUTCDate(), 'month' : months[day.getUTCMonth()], 'year' : day.getFullYear()});
     }
-    console.log(this.week);
   }
 
   getAvailability(schID, step, start, end, resource){
@@ -152,19 +171,22 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  book(mar) {
+  book(date, time) {
     //this.router.navigateByUrl('/patients/booking?id=' + this.doctorId+'&action=');
+    var successVar = {'page': 'checkout', 'doc': this.doctorDetails, 'date': date, 'time': time};
+    this.commonService.nextmessage(JSON.stringify(successVar));
+    this.router.navigateByUrl('/patients/checkout');
   }
 
   search(direct) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigateByUrl('/patients/booking?id=' + this.doctorId+'&action='+direct);
+      this.router.navigateByUrl('/patients/booking?action='+direct);
     });
   }
 
   searchDispo(dispo) {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigateByUrl('/patients/booking?id=' + this.doctorId+'&action='+dispo);
+      this.router.navigateByUrl('/patients/booking?action='+dispo);
     });
   }
 }

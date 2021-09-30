@@ -7,7 +7,7 @@ import firebase from 'firebase/app';
 import "firebase/auth";
 import 'firebase/firestore';
 import {AuthService} from '../../authService.service';
-
+import * as moment from 'moment';
 
 
 @Component({
@@ -42,15 +42,39 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.doctorId = this.route.snapshot.queryParams["id"];
-    this.date = this.route.snapshot.queryParams["date"];
-    this.time = this.route.snapshot.queryParams["time"];
     if(localStorage.getItem('auth') == 'true'){
       this.isConnected = 'true';
     }
-    this.getDoctorsDetails(this.doctorId);
-    this.allPatients();
-    this.getAppointments();
+    this.commonService.message.subscribe((res) => {
+      if(res != undefined){
+      // @ts-ignore
+      var _res = JSON.parse(res);
+        if(_res['page'] == 'checkout') {
+          // @ts-ignore
+          var dt = _res;
+          if (dt) {
+            var _data = dt;
+            this.doctorDetails = _data['doc'];
+            this.date = _data['date'];
+            this.time = _data['time'];
+            localStorage.setItem('checkout', JSON.stringify(_data));
+          }
+        }else if (localStorage.getItem("checkout")) {
+          var data1 = JSON.parse(localStorage.getItem('checkout'));
+          this.doctorDetails = data1['doc'];
+          this.date = data1['date'];
+          this.time = data1['time'];
+        }
+      }else if(res == undefined && localStorage.getItem("checkout")){
+            var data = JSON.parse(localStorage.getItem('checkout'));
+            this.doctorDetails = data['doc'];
+            this.date = data['date'];
+            this.time = data['time'];
+          }
+    });
+    //this.getDoctorsDetails(this.doctorId);
+    //this.allPatients();
+    //this.getAppointments();
   }
 
   getDoctorsDetails(doctorId) {
@@ -93,7 +117,7 @@ export class CheckoutComponent implements OnInit {
       status: "active",
       amount: this.doctorDetails.Price
     }
-    this.commonService.createAppointment(params)
+    /*this.commonService.createAppointment(params)
       .subscribe(res => {
         let patients = {
           id: this.patients.length + 1,
@@ -111,7 +135,7 @@ export class CheckoutComponent implements OnInit {
             this.router.navigate(['/patients/success']);
 
           })
-      })
+      })*/
   }
 
 
@@ -232,7 +256,7 @@ export class CheckoutComponent implements OnInit {
           //this.commonService.nextmessage('doctorLogin');
           //this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           //  location.reload();//this.router.navigate(['/patients/checkout?id='+this.doctorId+'&date='+this.date +'&time='+this.time]);
-         // });
+          // });
         },
         () => {
           this.toastr.error('', 'Login failed!');
@@ -283,6 +307,21 @@ export class CheckoutComponent implements OnInit {
     this.isPraticien = event.target.checked ? true : false;
   }
 
+  confirm() {
+    var step = this.doctorDetails.step;
+    var start = moment(this.date + " "+ this.time).format( "YYYY-MM-DD HH:mm:ss");
+    var end = moment(this.date + " "+ this.time).add(parseInt(step),'minutes').format( "YYYY-MM-DD HH:mm:ss");
+    this.commonService.createAppointment(this.doctorDetails.schID, step, this.doctorDetails.resource, start, end, this.doctorDetails.email,
+      this.doctorDetails.mobile,this.doctorDetails.location ).subscribe((res) => {
+      if(res['status'] == 'OK'){
+        var successVar = {'page': 'success', 'doc': this.doctorDetails.doctor_name, 'datetime': start};
+        this.commonService.nextmessage(JSON.stringify(successVar));
+        this.router.navigate(['/patients/success']);
+      }else{
+        this.toastr.error("Désolé nous n'avons pas pu confirmé votre rendez-vous");
+      }
+    });
+  }
 }
 
 

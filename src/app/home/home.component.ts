@@ -302,7 +302,7 @@ export class HomeComponent implements OnInit {
       console.log(error);
     });
 
-    this.db.collection("structures").get().then((querySnapshot) => {
+    /*this.db.collection("structures").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         var pts = {
           collection: "structures",
@@ -317,7 +317,7 @@ export class HomeComponent implements OnInit {
       });
     }).catch((error)=>{
       console.log(error);
-    });
+    });*/
 
   }
 
@@ -372,11 +372,14 @@ export class HomeComponent implements OnInit {
       this.searchDoc(item.name, where);
     }else {
       let filter = this.searchDoctor.filter((a) => (a.name === item.name && a.collection == 'doctors'));
-      localStorage.setItem("searchDetails", JSON.stringify(filter[0].pts.data()));
-      this.router.navigateByUrl('/patients/doctor-profile?id=' + filter[0].id);
+      //localStorage.setItem("searchDetails", JSON.stringify(filter[0].pts.data()));
+      //this.router.navigateByUrl('/patients/doctor-profile?id=' + filter[0].id);
+      var data = filter[0].pts.data();
+      data['page']='doctor-profile';
+      this.commonService.nextmessage(JSON.stringify(data));
+      this.router.navigateByUrl('/patients/doctor-profile');
     }
 
-    // do something with selected item
   }
 
   selectContryEvent(item) {

@@ -84,7 +84,10 @@ export class SearchDoctorComponent implements OnInit {
 
   bookAppointment(id) {
     // if((localStorage.getItem('auth') === 'true') && (localStorage.getItem('patient') === 'true')) {
-    this.router.navigateByUrl('/patients/booking?id=' + id);
+    var data = JSON.parse(localStorage.getItem("docs"))[parseInt(id)];
+    data['page'] = 'booking';
+    this.commonService.nextmessage(JSON.stringify(data));
+    this.router.navigateByUrl('/patients/booking');
 
     // } else {
     //   this.router.navigate(['/']);
@@ -92,8 +95,12 @@ export class SearchDoctorComponent implements OnInit {
   }
 
   printDocProfile(id){
-    localStorage.setItem("searchDetails", JSON.stringify(JSON.parse(localStorage.getItem("docs"))[parseInt(id)]));
-    this.router.navigateByUrl('/patients/doctor-profile?id=' + id);
+    //localStorage.setItem("searchDetails", JSON.stringify(JSON.parse(localStorage.getItem("docs"))[parseInt(id)]));
+    //this.router.navigateByUrl('/patients/doctor-profile?id=' + id);
+    var data = JSON.parse(localStorage.getItem("docs"))[parseInt(id)];
+    data['page'] = 'doctor-profile';
+    this.commonService.nextmessage(JSON.stringify(data));
+    this.router.navigateByUrl('/patients/doctor-profile');
 
   }
 
